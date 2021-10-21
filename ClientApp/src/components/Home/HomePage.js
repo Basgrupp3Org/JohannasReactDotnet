@@ -1,11 +1,14 @@
 ﻿import React, { useEffect, useState } from 'react'
 import authService from '../api-authorization/AuthorizeService'
 import Budget from './Budget'
+import './HomePage.css'
+import LastTransaction from './LastTransaction'
+import BigSavingGoal from './BigSavingGoal'
 
 
 export default function HomePage() {
     const [budgetData, setBudgetData] = useState([]);
-
+    const [purchaseData, setPurchaseData] = useState([]);
     useEffect(() => {
 
         async function fetchMyAPI() {
@@ -24,6 +27,44 @@ export default function HomePage() {
 
     }, []);
 
+    //useEffect(() => {
+
+    //    fetch('Budget.json', {
+    //        method: "GET",
+    //        headers: {
+    //            'Content-Type': 'application/json',
+    //            'Accept': 'application/json'
+    //        },
+
+    //    })
+    //        .then((data) => data.json())
+    //        .then((data) => {
+    //            setBudgetData(data)
+    //        })
+    //        .catch((err) => {
+    //            console.error(err);
+    //        });
+
+
+    //}, []);
+
+    //useEffect(() => {
+
+    //    fetch('Purchase.json', {
+    //        method: "GET",
+    //        headers: {
+    //            'Content-Type': 'application/json',
+    //            'Accept': 'application/json'
+    //        },
+    //    })
+    //        .then((data) => data.json())
+    //        .then((data) => {
+    //            setPurchaseData(data)
+    //        })
+    //        .catch((err) => {
+    //            console.error(err);
+    //        });
+    //}, [])
     return (
         <div className="homepage__fullPage_div">
 
