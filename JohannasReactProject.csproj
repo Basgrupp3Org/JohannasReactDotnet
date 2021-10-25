@@ -30,6 +30,8 @@
   <ItemGroup>
     <Folder Include="ClientApp\src\components\Budget\" />
     <Folder Include="ClientApp\src\components\History\" />
+    <Folder Include="Services\Abstract\" />
+    <Folder Include="Services\Concrete\" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
