@@ -5,9 +5,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace JohannasReactProject.Repositories.Abstract
+namespace JohannasReactProject.Services.Abstract
 {
-    public interface IBudgetRepo
+    public interface IBudgetService
     {
         void Post(Budget budget);
         void Edit(EditBudgetDTO budget);

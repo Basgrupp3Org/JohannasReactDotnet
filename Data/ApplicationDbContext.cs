@@ -1,5 +1,6 @@
 ﻿using IdentityServer4.EntityFramework.Options;
 using JohannasReactProject.Models;
+using JohannasReactProject.Models.Entities;
 using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
@@ -17,5 +18,7 @@ namespace JohannasReactProject.Data
             IOptions<OperationalStoreOptions> operationalStoreOptions) : base(options, operationalStoreOptions)
         {
         }
+
+        public DbSet<Budget> Budgets { get; set; }
     }
 }

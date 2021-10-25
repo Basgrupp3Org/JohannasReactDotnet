@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using JohannasReactProject.Models.Entities;
+using JohannasReactProject.Repositories.Abstract;
+using JohannasReactProject.Services.Abstract;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -9,11 +12,14 @@ using System.Threading.Tasks;
 
 namespace JohannasReactProject.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/budget")]
     [ApiController]
     [Authorize]
     public class BudgetController : ControllerBase
     {
+        private readonly IBudgetService _service;
+
+        public BudgetController(IBudgetService service) => _service = service;
         // GET: api/<BudgetController>
         [HttpGet]
         public IEnumerable<string> Get()
@@ -29,9 +35,10 @@ namespace JohannasReactProject.Controllers
         }
 
         // POST api/<BudgetController>
-        [HttpPost]
-        public void Post([FromBody] string value)
+        [HttpPost("/post")]
+        public void Post([FromBody] Budget budget)
         {
+            _service.Post(budget);
         }
 
         // PUT api/<BudgetController>/5

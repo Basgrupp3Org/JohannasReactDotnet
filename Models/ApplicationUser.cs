@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using JohannasReactProject.Models.Entities;
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,5 +9,7 @@ namespace JohannasReactProject.Models
 {
     public class ApplicationUser : IdentityUser
     {
+        public virtual ICollection<Budget> Budget { get; set; }
+        public virtual ICollection<BudgetCategory> BudgetCategory { get; set; }
     }
 }
