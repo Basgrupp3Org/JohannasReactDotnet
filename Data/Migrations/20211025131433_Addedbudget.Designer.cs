@@ -4,14 +4,16 @@ using JohannasReactProject.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace JohannasReactProject.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211025131433_Addedbudget")]
+    partial class Addedbudget
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -221,77 +223,6 @@ namespace JohannasReactProject.Data.Migrations
                     b.ToTable("Budgets");
                 });
 
-            modelBuilder.Entity("JohannasReactProject.Models.Entities.BudgetCategory", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("BudgetId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("FixedCostsCategoryId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<Guid?>("VariableCostsCategoryId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("BudgetId");
-
-                    b.HasIndex("FixedCostsCategoryId");
-
-                    b.HasIndex("UserId");
-
-                    b.HasIndex("VariableCostsCategoryId");
-
-                    b.ToTable("BudgetCategory");
-                });
-
-            modelBuilder.Entity("JohannasReactProject.Models.Entities.FixedCostsCategories", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<decimal>("Cost")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<decimal>("Sum")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("FixedCostsCategories");
-                });
-
-            modelBuilder.Entity("JohannasReactProject.Models.Entities.VariableCostsCategories", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<decimal>("Spent")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<decimal>("ToSpend")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("VariableCostsCategories");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
@@ -434,33 +365,6 @@ namespace JohannasReactProject.Data.Migrations
                         .HasForeignKey("ApplicationUserId");
                 });
 
-            modelBuilder.Entity("JohannasReactProject.Models.Entities.BudgetCategory", b =>
-                {
-                    b.HasOne("JohannasReactProject.Models.Entities.Budget", "Budget")
-                        .WithMany()
-                        .HasForeignKey("BudgetId");
-
-                    b.HasOne("JohannasReactProject.Models.Entities.FixedCostsCategories", "FixedCostsCategory")
-                        .WithMany()
-                        .HasForeignKey("FixedCostsCategoryId");
-
-                    b.HasOne("JohannasReactProject.Models.ApplicationUser", "User")
-                        .WithMany("BudgetCategory")
-                        .HasForeignKey("UserId");
-
-                    b.HasOne("JohannasReactProject.Models.Entities.VariableCostsCategories", "VariableCostsCategory")
-                        .WithMany()
-                        .HasForeignKey("VariableCostsCategoryId");
-
-                    b.Navigation("Budget");
-
-                    b.Navigation("FixedCostsCategory");
-
-                    b.Navigation("User");
-
-                    b.Navigation("VariableCostsCategory");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -515,8 +419,6 @@ namespace JohannasReactProject.Data.Migrations
             modelBuilder.Entity("JohannasReactProject.Models.ApplicationUser", b =>
                 {
                     b.Navigation("Budget");
-
-                    b.Navigation("BudgetCategory");
                 });
 #pragma warning restore 612, 618
         }
