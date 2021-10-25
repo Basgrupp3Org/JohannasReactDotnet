@@ -75,10 +75,10 @@ export default function HomePage() {
             <hr />
             <div className="homepage__LowerPart_div">
                 <div className="homepage__LeftLowerPart_div">
-                    {purchaseData ? <LastTransaction data={purchaseData} /> : "Laddar data.."}
+                    {/*{purchaseData ? <LastTransaction data={purchaseData} /> : "Laddar data.."}*/}
                 </div>
                 <div className="homepage__RightLowerPart_div">
-                    {budgetData ? <BigSavingGoal data={budgetData} /> : "Laddar data..."}
+                    {/*{budgetData ? <BigSavingGoal data={budgetData} /> : "Laddar data..."}*/}
                 </div>
             </div>
         </div>
