@@ -35,7 +35,7 @@ namespace JohannasReactProject.Controllers
         }
 
         // POST api/<BudgetController>
-        [HttpPost("/post")]
+        [HttpPost("post")]
         public void Post([FromBody] Budget budget)
         {
             _service.Post(budget);

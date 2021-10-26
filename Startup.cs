@@ -2,6 +2,8 @@ using JohannasReactProject.Data;
 using JohannasReactProject.Models;
 using JohannasReactProject.Repositories.Abstract;
 using JohannasReactProject.Repositories.Concrete;
+using JohannasReactProject.Services.Abstract;
+using JohannasReactProject.Services.Concrete;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -39,6 +41,7 @@ namespace JohannasReactProject
 
             services.AddIdentityServer()
                 .AddApiAuthorization<ApplicationUser, ApplicationDbContext>();
+            services.AddTransient<IBudgetService, BudgetService>();
             services.AddTransient<IBudgetRepo, BudgetRepo>();
 
             services.AddAuthentication()
