@@ -13,6 +13,8 @@ namespace JohannasReactProject.Models.Entities
         public decimal Housing { get; set; }
         public decimal Vehicle { get; set; }
         public decimal Unbudgeted { get; set; }
+        public virtual ICollection<BudgetCategory> BudgetCategories { get; set; }
+        public virtual ICollection<FixedCostsCategories> FixedCostsCategories { get; set; }
         //public virtual JohannasBaksidaUser User { get; set; }
         //public virtual ICollection<BudgetCategory> BudgetCategory { get; set; }
     }

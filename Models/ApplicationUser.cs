@@ -10,6 +10,6 @@ namespace JohannasReactProject.Models
     public class ApplicationUser : IdentityUser
     {
         public virtual ICollection<Budget> Budget { get; set; }
-        public virtual ICollection<BudgetCategory> BudgetCategory { get; set; }
+        public virtual ICollection<SavingGoal> SavingGoals { get; set; }
     }
 }
