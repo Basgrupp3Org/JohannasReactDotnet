@@ -45,6 +45,8 @@ namespace JohannasReactProject
             services.AddTransient<IBudgetRepo, BudgetRepo>();
             services.AddTransient<IVariableCostCategoryService, VariableCostCategoryService>();
             services.AddTransient<IVariableCostCategoryRepo, VariableCostCategoryRepo>();
+            services.AddTransient<IFixedCostCategoryService, FixedCostCategoryService>();
+            services.AddTransient<IFixedCostCategoryRepo, FixedCostCategoryRepo>();
 
 
             services.AddAuthentication()
