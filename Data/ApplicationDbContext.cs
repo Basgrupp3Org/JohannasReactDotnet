@@ -25,5 +25,6 @@ namespace JohannasReactProject.Data
 
         public DbSet<FixedCostsCategories> FixedCostsCategories { get; set; }
         public DbSet<Purchase> Purchases { get; set; }
+        public DbSet<SavingGoal> SavingGoals { get; set; }
     }
 }
