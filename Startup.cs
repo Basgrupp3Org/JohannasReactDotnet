@@ -43,6 +43,9 @@ namespace JohannasReactProject
                 .AddApiAuthorization<ApplicationUser, ApplicationDbContext>();
             services.AddTransient<IBudgetService, BudgetService>();
             services.AddTransient<IBudgetRepo, BudgetRepo>();
+            services.AddTransient<IVariableCostCategoryService, VariableCostCategoryService>();
+            services.AddTransient<IVariableCostCategoryRepo, VariableCostCategoryRepo>();
+
 
             services.AddAuthentication()
                 .AddIdentityServerJwt();

@@ -1,4 +1,5 @@
 ﻿using JohannasReactProject.Models.Entities;
+using JohannasReactProject.Models.Web;
 using JohannasReactProject.Repositories.Abstract;
 using JohannasReactProject.Services.Abstract;
 using Microsoft.AspNetCore.Authorization;
@@ -42,9 +43,10 @@ namespace JohannasReactProject.Controllers
         }
 
         // PUT api/<BudgetController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpPut("edit")]
+        public void Put([FromBody] EditBudgetDTO  editBudget)
         {
+            _service.Edit(editBudget);
         }
 
         // DELETE api/<BudgetController>/5
