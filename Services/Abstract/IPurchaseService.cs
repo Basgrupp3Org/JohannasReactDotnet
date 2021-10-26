@@ -5,9 +5,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace JohannasReactProject.Repositories.Abstract
+namespace JohannasReactProject.Services.Abstract
 {
-     public interface IPurchaseRepo
+     public interface IPurchaseService
     {
         void Post(Purchase purchase);
         void Edit(EditPurchaseDTO editPurchase);
