@@ -11,6 +11,6 @@ namespace JohannasReactProject.Models.Entities
         public decimal ToSave { get; set; }
         public string Name { get; set; }
         public decimal Saved { get; set; }
-        public virtual ApplicationUser User { get; set; }
+
     }
 }
