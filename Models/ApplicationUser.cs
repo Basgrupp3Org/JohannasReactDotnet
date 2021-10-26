@@ -11,5 +11,6 @@ namespace JohannasReactProject.Models
     {
         public virtual ICollection<Budget> Budget { get; set; }
         public virtual ICollection<SavingGoal> SavingGoals { get; set; }
+        
     }
 }

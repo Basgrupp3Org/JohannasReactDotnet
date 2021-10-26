@@ -12,7 +12,6 @@ namespace JohannasReactProject.Repositories.Concrete
     public class PurchaseRepo  : IPurchaseRepo
     {
         private readonly ApplicationDbContext _context;
-
         public PurchaseRepo(ApplicationDbContext context) => _context = context;
         public void Edit(EditPurchaseDTO editPurchaseDTO)
         {
