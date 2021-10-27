@@ -2,6 +2,7 @@
 import HistorySidebar from "./HistorySidebar";
 import BudgetData from "./BudgetData";
 
+
 export default function Budgets() {
     const [active, setActive] = useState("");
     return (

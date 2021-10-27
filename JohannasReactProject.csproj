@@ -28,7 +28,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="ClientApp\src\components\Budget\" />
 
     <Folder Include="ClientApp\src\components\History\" />
 

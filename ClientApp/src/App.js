@@ -7,6 +7,7 @@ import ApiAuthorizationRoutes from './components/api-authorization/ApiAuthorizat
 import { ApplicationPaths } from './components/api-authorization/ApiAuthorizationConstants';
 import HomePage from './components/Home/HomePage';
 import HistoryPage from './components/History/HistoryPage';
+import BudgetPage from './components/Budget/BudgetPage';
 import './custom.css'
 
 export default class App extends Component {
@@ -17,9 +18,11 @@ export default class App extends Component {
       <Layout>
             <Route exact path='/' component={Home} />
             <Route exact path='/Homepage' component={HomePage} />
+            
      
             <AuthorizeRoute path='/HomePage' component={HomePage} />
             <AuthorizeRoute path='/HistoryPage' component={HistoryPage} />
+            <AuthorizeRoute path='/BudgetPage' component={BudgetPage} />
 
         <Route path={ApplicationPaths.ApiAuthorizationPrefix} component={ApiAuthorizationRoutes} />
       </Layout>
