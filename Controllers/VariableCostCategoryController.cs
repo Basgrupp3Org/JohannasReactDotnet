@@ -36,16 +36,16 @@ namespace JohannasReactProject.Controllers
 
         // POST api/<VariableCostCategoryController>
         [HttpPost]
-        public void Post([FromBody] VariableCostsCategories variableCostsCategories)
+        public async Task Post([FromBody] VariableCostsCategories variableCostsCategories)
         {
-            _service.Post(variableCostsCategories);
+            await _service.Post(variableCostsCategories);
         }
 
         // PUT api/<VariableCostCategoryController>/5
         [HttpPut]
-        public void Put( [FromBody] EditVariableCostCategoryDTO editVariableCostCategoryDTO)
+        public async Task Put( [FromBody] EditVariableCostCategoryDTO editVariableCostCategoryDTO)
         {
-            _service.Edit(editVariableCostCategoryDTO);
+            await _service.Edit(editVariableCostCategoryDTO);
         }
 
         // DELETE api/<VariableCostCategoryController>/5

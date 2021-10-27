@@ -9,7 +9,7 @@ namespace JohannasReactProject.Services.Abstract
 {
     public interface IBudgetService
     {
-        void Post(Budget budget);
-        void Edit(EditBudgetDTO budget);
+        Task Post(Budget budget);
+        Task Edit(EditBudgetDTO budget);
     }
 }

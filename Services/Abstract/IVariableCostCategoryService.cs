@@ -9,7 +9,7 @@ namespace JohannasReactProject.Services.Abstract
 {
    public interface IVariableCostCategoryService
     {
-        void Post(VariableCostsCategories variableCostsCategories);
-        void Edit(EditVariableCostCategoryDTO editVariableCostCategoryDTO);
+        Task Post(VariableCostsCategories variableCostsCategories);
+        Task Edit(EditVariableCostCategoryDTO editVariableCostCategoryDTO);
     }
 }

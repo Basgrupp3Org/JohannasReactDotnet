@@ -14,7 +14,7 @@ namespace JohannasReactProject.Repositories.Concrete
         private readonly ApplicationDbContext _context;
 
         public BudgetRepo(ApplicationDbContext context) => _context = context;
-        public void Edit(EditBudgetDTO budget)
+        public async Task Edit(EditBudgetDTO budget)
         {
             var foundBudget = _context.Budgets.Where(x => x.Id == budget.Id).FirstOrDefault();
            
@@ -22,14 +22,14 @@ namespace JohannasReactProject.Repositories.Concrete
                 foundBudget.StartDate = budget.StartDate;
                 foundBudget.EndDate = budget.EndDate;
 
-                _context.SaveChanges();
+            await _context.SaveChangesAsync();
             
         }
 
-        public void Post(Budget budget)
+        public async Task Post(Budget budget)
         {
             _context.Budgets.Add(budget);
-            _context.SaveChanges();
+           await _context.SaveChangesAsync();
         }
     }
 }

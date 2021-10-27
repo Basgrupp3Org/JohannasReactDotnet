@@ -13,14 +13,14 @@ namespace JohannasReactProject.Services.Concrete
     {
         private readonly IBudgetRepo _budgetRepo;
         public BudgetService(IBudgetRepo budgetRepo) => _budgetRepo = budgetRepo;
-        public void Edit(EditBudgetDTO budget)
+        public async Task Edit(EditBudgetDTO budget)
         {
-            _budgetRepo.Edit(budget);
+            await _budgetRepo.Edit(budget);
         }
 
-        public void Post(Budget budget)
+        public async Task Post(Budget budget)
         {
-            _budgetRepo.Post(budget);
+           await _budgetRepo.Post(budget);
         }
     }
 }

@@ -9,7 +9,7 @@ namespace JohannasReactProject.Repositories.Abstract
 {
     public interface ISavingGoalRepo
     {
-        void Post(SavingGoal savingGoal);
-        void Edit(EditSavingGoalDTO editSavingGoalDTO);
+        Task Post(SavingGoal savingGoal);
+        Task Edit(EditSavingGoalDTO editSavingGoalDTO);
     }
 }

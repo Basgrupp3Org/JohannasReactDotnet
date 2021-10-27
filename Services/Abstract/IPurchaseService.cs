@@ -9,7 +9,7 @@ namespace JohannasReactProject.Services.Abstract
 {
      public interface IPurchaseService
     {
-        void Post(Purchase purchase);
-        void Edit(EditPurchaseDTO editPurchase);
+        Task Post(Purchase purchase);
+        Task Edit(EditPurchaseDTO editPurchase);
     }
 }

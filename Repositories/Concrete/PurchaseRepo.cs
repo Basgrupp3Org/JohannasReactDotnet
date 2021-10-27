@@ -13,7 +13,7 @@ namespace JohannasReactProject.Repositories.Concrete
     {
         private readonly ApplicationDbContext _context;
         public PurchaseRepo(ApplicationDbContext context) => _context = context;
-        public void Edit(EditPurchaseDTO editPurchaseDTO)
+        public async Task Edit(EditPurchaseDTO editPurchaseDTO)
         {
             var foundPurchase = _context.Purchases.Where(x => x.Id == editPurchaseDTO.Id).FirstOrDefault();
 
@@ -25,13 +25,13 @@ namespace JohannasReactProject.Repositories.Concrete
 
 
 
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
-        public void Post(Purchase purchases)
+        public async Task Post(Purchase purchases)
         {
             _context.Purchases.Add(purchases);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
     }
 }

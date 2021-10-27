@@ -36,17 +36,17 @@ namespace JohannasReactProject.Controllers
 
         // POST api/<PurchaseController>
         [HttpPost]
-        public void Post([FromBody] Purchase purchase)
+        public async Task Post([FromBody] Purchase purchase)
         {
-            _service.Post(purchase);
+            await _service.Post(purchase);
         }
 
 
         // PUT api/<PurchaseController>/5
         [HttpPut]
-        public void Put([FromBody] EditPurchaseDTO editPurchaseDTO)
+        public async Task Put([FromBody] EditPurchaseDTO editPurchaseDTO)
         {
-            _service.Edit(editPurchaseDTO);
+           await _service.Edit(editPurchaseDTO);
         }
 
         // DELETE api/<PurchaseController>/5

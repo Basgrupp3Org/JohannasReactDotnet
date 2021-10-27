@@ -13,7 +13,7 @@ namespace JohannasReactProject.Repositories.Concrete
     {
         private readonly ApplicationDbContext _context;
         public SavingGoalRepo(ApplicationDbContext context) => _context = context;
-        public void Edit(EditSavingGoalDTO editSavingGoalDTO)
+        public async Task Edit(EditSavingGoalDTO editSavingGoalDTO)
         {
             var foundSavingGoal = _context.SavingGoals.Where(x => x.Id == editSavingGoalDTO.Id).FirstOrDefault();
 
@@ -21,13 +21,13 @@ namespace JohannasReactProject.Repositories.Concrete
             foundSavingGoal.Saved = editSavingGoalDTO.Saved;
             foundSavingGoal.ToSave = editSavingGoalDTO.ToSave;
 
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
-        public void Post(SavingGoal savingGoal)
+        public async Task Post(SavingGoal savingGoal)
         {
             _context.SavingGoals.Add(savingGoal);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
     }
 }

@@ -36,17 +36,17 @@ namespace JohannasReactProject.Controllers
         }
 
         // POST api/<BudgetController>
-        [HttpPost("post")]
-        public void Post([FromBody] Budget budget)
+        [HttpPost]
+        public async Task Post([FromBody] Budget budget)
         {
-            _service.Post(budget);
+            await _service.Post(budget);
         }
 
         // PUT api/<BudgetController>/5
-        [HttpPut("edit")]
-        public void Put([FromBody] EditBudgetDTO  editBudget)
+        [HttpPut]
+        public async Task Put([FromBody] EditBudgetDTO  editBudget)
         {
-            _service.Edit(editBudget);
+            await _service.Edit(editBudget);
         }
 
         // DELETE api/<BudgetController>/5

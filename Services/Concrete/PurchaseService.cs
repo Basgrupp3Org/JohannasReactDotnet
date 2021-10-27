@@ -13,14 +13,14 @@ namespace JohannasReactProject.Services.Concrete
     {
         private readonly IPurchaseRepo _purchaseRepo;
         public PurchaseService(IPurchaseRepo purchaseRepo) => _purchaseRepo = purchaseRepo;
-        public void Edit(EditPurchaseDTO purchase)
+        public async Task Edit(EditPurchaseDTO purchase)
         {
-            _purchaseRepo.Edit(purchase);
+            await _purchaseRepo.Edit(purchase);
         }
 
-        public void Post(Purchase purchase)
+        public async Task Post(Purchase purchase)
         {
-            _purchaseRepo.Post(purchase);
+            await _purchaseRepo.Post(purchase);
         }
     }
 }
