@@ -13,14 +13,14 @@ namespace JohannasReactProject.Services.Concrete
     {
         private readonly ISavingGoalRepo _savingGoalRepo;
         public SavingGoalService(ISavingGoalRepo savingGoalRepo) => _savingGoalRepo = savingGoalRepo;
-        public void Edit(EditSavingGoalDTO editSavingGoalDTO)
+        public async Task Edit(EditSavingGoalDTO editSavingGoalDTO)
         {
-            _savingGoalRepo.Edit(editSavingGoalDTO);
+            await _savingGoalRepo.Edit(editSavingGoalDTO);
         }
 
-        public void Post(SavingGoal savingGoal)
+        public async Task Post(SavingGoal savingGoal)
         {
-            _savingGoalRepo.Post(savingGoal);
+            await _savingGoalRepo.Post(savingGoal);
         }
     }
 }

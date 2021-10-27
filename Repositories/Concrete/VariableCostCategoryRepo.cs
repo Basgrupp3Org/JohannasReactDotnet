@@ -14,7 +14,7 @@ namespace JohannasReactProject.Repositories.Concrete
         private readonly ApplicationDbContext _context;
 
         public VariableCostCategoryRepo (ApplicationDbContext context) => _context = context;
-        public void Edit(EditVariableCostCategoryDTO editVariableCostCategoryDTO)
+        public async Task Edit(EditVariableCostCategoryDTO editVariableCostCategoryDTO)
         {
             var foundCategory = _context.VariableCostsCategories.Where(x => x.Id == editVariableCostCategoryDTO.Id).FirstOrDefault();
 
@@ -22,13 +22,13 @@ namespace JohannasReactProject.Repositories.Concrete
             foundCategory.Spent= editVariableCostCategoryDTO.Spent;
             foundCategory.ToSpend = editVariableCostCategoryDTO.ToSpend;
 
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
-        public void Post(VariableCostsCategories variableCostsCategories)
+        public async Task Post(VariableCostsCategories variableCostsCategories)
         {
             _context.VariableCostsCategories.Add(variableCostsCategories);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
     }
 }

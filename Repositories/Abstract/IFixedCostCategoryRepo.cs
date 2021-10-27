@@ -9,7 +9,7 @@ namespace JohannasReactProject.Repositories.Abstract
 {
     public interface IFixedCostCategoryRepo
     {
-        void Post(FixedCostsCategories fixedCostsCategories);
-        void Edit(EditFixedCostCategoryDTO editFixedCostCategoryDTO);
+        Task Post(FixedCostsCategories fixedCostsCategories);
+        Task Edit(EditFixedCostCategoryDTO editFixedCostCategoryDTO);
     }
 }

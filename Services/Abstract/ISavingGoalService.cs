@@ -9,7 +9,7 @@ namespace JohannasReactProject.Services.Abstract
 {
     public interface ISavingGoalService
     {
-        void Post(SavingGoal savingGoal);
-        void Edit(EditSavingGoalDTO editSavingGoalDTO);
+        Task Post(SavingGoal savingGoal);
+        Task Edit(EditSavingGoalDTO editSavingGoalDTO);
     }
 }

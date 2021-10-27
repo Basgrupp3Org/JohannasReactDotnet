@@ -9,7 +9,7 @@ namespace JohannasReactProject.Repositories.Abstract
 {
     public interface IBudgetRepo
     {
-        void Post(Budget budget);
-        void Edit(EditBudgetDTO budget);
+        Task Post(Budget budget);
+        Task Edit(EditBudgetDTO budget);
     }
 }

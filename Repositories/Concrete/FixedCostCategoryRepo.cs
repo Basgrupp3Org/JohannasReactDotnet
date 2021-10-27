@@ -14,20 +14,20 @@ namespace JohannasReactProject.Repositories.Concrete
         private readonly ApplicationDbContext _context;
 
         public FixedCostCategoryRepo(ApplicationDbContext context) => _context = context;
-        public void Edit(EditFixedCostCategoryDTO editFixedCostCategoryDTO)
+        public async Task Edit(EditFixedCostCategoryDTO editFixedCostCategoryDTO)
         {
             var foundCategory = _context.FixedCostsCategories.Where(x => x.Id == editFixedCostCategoryDTO.Id).FirstOrDefault();
 
             foundCategory.Name = editFixedCostCategoryDTO.Name;
             foundCategory.Cost = editFixedCostCategoryDTO.Cost;
 
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
-        public void Post(FixedCostsCategories fixedCostsCategories)
+        public async Task Post(FixedCostsCategories fixedCostsCategories)
         {
             _context.FixedCostsCategories.Add(fixedCostsCategories);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
     }
 }

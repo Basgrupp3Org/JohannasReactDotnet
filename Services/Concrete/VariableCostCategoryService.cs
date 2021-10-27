@@ -14,14 +14,14 @@ namespace JohannasReactProject.Services.Concrete
     {
         private readonly IVariableCostCategoryRepo _variableCostCategoryRepo;
         public VariableCostCategoryService(IVariableCostCategoryRepo variableCostCategoryRepo) => _variableCostCategoryRepo = variableCostCategoryRepo;
-        public void Edit(EditVariableCostCategoryDTO editVariableCostCategoryDTO)
+        public async Task Edit(EditVariableCostCategoryDTO editVariableCostCategoryDTO)
         {
-            _variableCostCategoryRepo.Edit(editVariableCostCategoryDTO);
+            await _variableCostCategoryRepo.Edit(editVariableCostCategoryDTO);
         }
 
-        public void Post(VariableCostsCategories variableCostsCategories)
+        public async Task Post(VariableCostsCategories variableCostsCategories)
         {
-            _variableCostCategoryRepo.Post(variableCostsCategories);
+            await _variableCostCategoryRepo.Post(variableCostsCategories);
         }
     }
 }

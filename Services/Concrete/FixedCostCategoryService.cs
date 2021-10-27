@@ -13,14 +13,14 @@ namespace JohannasReactProject.Services.Concrete
     {
         private readonly IFixedCostCategoryRepo _fixedCostCategoryRepo;
         public FixedCostCategoryService(IFixedCostCategoryRepo fixedCostCategoryRepo) => _fixedCostCategoryRepo = fixedCostCategoryRepo;
-        public void Edit(EditFixedCostCategoryDTO editFixedCostCategoryDTO)
+        public async Task Edit(EditFixedCostCategoryDTO editFixedCostCategoryDTO)
         {
-            _fixedCostCategoryRepo.Edit(editFixedCostCategoryDTO);
+           await _fixedCostCategoryRepo.Edit(editFixedCostCategoryDTO);
         }
 
-        public void Post(FixedCostsCategories fixedCostsCategories)
+        public async Task Post(FixedCostsCategories fixedCostsCategories)
         {
-            _fixedCostCategoryRepo.Post(fixedCostsCategories);
+            await _fixedCostCategoryRepo.Post(fixedCostsCategories);
         }
     }
 }

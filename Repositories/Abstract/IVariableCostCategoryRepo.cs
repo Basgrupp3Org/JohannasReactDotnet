@@ -9,7 +9,7 @@ namespace JohannasReactProject.Repositories.Abstract
 {
     public interface IVariableCostCategoryRepo
     {
-        void Post(VariableCostsCategories variableCostsCategories);
-        void Edit(EditVariableCostCategoryDTO editVariableCostCategoryDTO);
+        Task Post(VariableCostsCategories variableCostsCategories);
+        Task Edit(EditVariableCostCategoryDTO editVariableCostCategoryDTO);
     }
 }

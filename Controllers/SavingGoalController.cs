@@ -36,16 +36,16 @@ namespace JohannasReactProject.Controllers
 
         // POST api/<SavingGoalController>
         [HttpPost]
-        public void Post([FromBody] SavingGoal savingGoal)
+        public async Task Post([FromBody] SavingGoal savingGoal)
         {
-            _service.Post(savingGoal);
+            await _service.Post(savingGoal);
         }
 
         // PUT api/<SavingGoalController>/5
         [HttpPut]
-        public void Put([FromBody] EditSavingGoalDTO editSavingGoalDTO)
+        public async Task Put([FromBody] EditSavingGoalDTO editSavingGoalDTO)
         {
-            _service.Edit(editSavingGoalDTO);
+           await _service.Edit(editSavingGoalDTO);
         }
 
         // DELETE api/<SavingGoalController>/5
