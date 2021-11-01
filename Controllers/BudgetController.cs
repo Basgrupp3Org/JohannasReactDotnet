@@ -4,10 +4,12 @@ using JohannasReactProject.Models.Web;
 using JohannasReactProject.Repositories.Abstract;
 using JohannasReactProject.Services.Abstract;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -20,13 +22,18 @@ namespace JohannasReactProject.Controllers
     public class BudgetController : ControllerBase
     {
         private readonly IBudgetService _service;
-
-        public BudgetController(IBudgetService service) => _service = service;
+        private readonly string _userId;
         // GET: api/<BudgetController>
-        [HttpGet]
-        public IEnumerable<BudgetDTO> Get(ApplicationUser user)
+        public BudgetController(IBudgetService service, IHttpContextAccessor httpContextAccessor)
         {
-            return _service.Get(user);
+            _service = service;
+            _userId = httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+        }
+
+        [HttpGet]
+        public IEnumerable<BudgetDTO> Get()
+        {
+            return _service.Get(_userId);
         }
 
         // GET api/<BudgetController>/5

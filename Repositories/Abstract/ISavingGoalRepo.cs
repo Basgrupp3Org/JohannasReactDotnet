@@ -9,7 +9,8 @@ namespace JohannasReactProject.Repositories.Abstract
 {
     public interface ISavingGoalRepo
     {
-        Task Post(SavingGoal savingGoal);
+        Task Post(SavingGoal savingGoal, string userId);
         Task Edit(EditSavingGoalDTO editSavingGoalDTO);
+        IEnumerable<SavingGoalDTO> Get(string userId);
     }
 }

@@ -27,11 +27,10 @@ namespace JohannasReactProject.Repositories.Concrete
             await _context.SaveChangesAsync();
         }
 
-        public IEnumerable<VariableCostCategoryDTO> Get(ApplicationUser applicationUser)
+        public IEnumerable<VariableCostCategoryDTO> Get(string userId)
         {
             var returnList = new List<VariableCostCategoryDTO>();
-
-            var variableCostCateogry = _context.VariableCostsCategories.Where(x => x.User.Id == applicationUser.Id).ToList();
+            var variableCostCateogry = _context.VariableCostsCategories.Where(x => x.User.Id == userId).ToList();
            foreach(var item in variableCostCateogry)
            {
                 returnList.Add(new VariableCostCategoryDTO
@@ -44,10 +43,9 @@ namespace JohannasReactProject.Repositories.Concrete
             return returnList;
         }
 
-        public async Task Post(VariableCostsCategories variableCostsCategories)
+        public async Task Post(VariableCostsCategories variableCostsCategories, string userId)
         {
-            var user = variableCostsCategories.User.Id;
-            var person = _context.Users.Where(u => u.Id == user).FirstOrDefault();
+            var person = _context.Users.Where(u => u.Id == userId).FirstOrDefault();
             variableCostsCategories.User = person;
             _context.VariableCostsCategories.Add(variableCostsCategories);
             await _context.SaveChangesAsync();

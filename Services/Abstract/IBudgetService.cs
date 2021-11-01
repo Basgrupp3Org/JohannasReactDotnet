@@ -12,6 +12,6 @@ namespace JohannasReactProject.Services.Abstract
     {
         Task Post(Budget budget);
         Task Edit(EditBudgetDTO budget);
-        IEnumerable<BudgetDTO> Get(ApplicationUser applicationUser);
+        IEnumerable<BudgetDTO> Get(string userId);
     }
 }

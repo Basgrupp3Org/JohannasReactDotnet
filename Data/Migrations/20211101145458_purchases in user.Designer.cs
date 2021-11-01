@@ -4,14 +4,16 @@ using JohannasReactProject.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace JohannasReactProject.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211101145458_purchases in user")]
+    partial class purchasesinuser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -297,6 +299,9 @@ namespace JohannasReactProject.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("ApplicationUserId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
@@ -306,12 +311,9 @@ namespace JohannasReactProject.Data.Migrations
                     b.Property<decimal>("ToSave")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("ApplicationUserId");
 
                     b.ToTable("SavingGoals");
                 });
@@ -526,11 +528,9 @@ namespace JohannasReactProject.Data.Migrations
 
             modelBuilder.Entity("JohannasReactProject.Models.Entities.SavingGoal", b =>
                 {
-                    b.HasOne("JohannasReactProject.Models.ApplicationUser", "User")
+                    b.HasOne("JohannasReactProject.Models.ApplicationUser", null)
                         .WithMany("SavingGoals")
-                        .HasForeignKey("UserId");
-
-                    b.Navigation("User");
+                        .HasForeignKey("ApplicationUserId");
                 });
 
             modelBuilder.Entity("JohannasReactProject.Models.Entities.VariableCostsCategories", b =>
