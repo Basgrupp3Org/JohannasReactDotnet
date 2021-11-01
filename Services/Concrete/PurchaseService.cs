@@ -1,4 +1,5 @@
-﻿using JohannasReactProject.Models.Entities;
+﻿using JohannasReactProject.Models;
+using JohannasReactProject.Models.Entities;
 using JohannasReactProject.Models.Web;
 using JohannasReactProject.Repositories.Abstract;
 using JohannasReactProject.Services.Abstract;
@@ -16,6 +17,11 @@ namespace JohannasReactProject.Services.Concrete
         public async Task Edit(EditPurchaseDTO purchase)
         {
             await _purchaseRepo.Edit(purchase);
+        }
+
+        public ICollection<PurchaseDTO> Get(ApplicationUser applicationUser)
+        {
+            return _purchaseRepo.Get(applicationUser);
         }
 
         public async Task Post(Purchase purchase)
