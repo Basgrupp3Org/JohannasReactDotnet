@@ -1,4 +1,5 @@
-﻿using JohannasReactProject.Models.Entities;
+﻿using JohannasReactProject.Models;
+using JohannasReactProject.Models.Entities;
 using JohannasReactProject.Models.Web;
 using System;
 using System.Collections.Generic;
@@ -11,5 +12,6 @@ namespace JohannasReactProject.Services.Abstract
     {
         Task Post(Budget budget);
         Task Edit(EditBudgetDTO budget);
+        IEnumerable<BudgetDTO> Get(ApplicationUser applicationUser);
     }
 }

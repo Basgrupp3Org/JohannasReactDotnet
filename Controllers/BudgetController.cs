@@ -1,4 +1,5 @@
-﻿using JohannasReactProject.Models.Entities;
+﻿using JohannasReactProject.Models;
+using JohannasReactProject.Models.Entities;
 using JohannasReactProject.Models.Web;
 using JohannasReactProject.Repositories.Abstract;
 using JohannasReactProject.Services.Abstract;
@@ -23,9 +24,9 @@ namespace JohannasReactProject.Controllers
         public BudgetController(IBudgetService service) => _service = service;
         // GET: api/<BudgetController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IEnumerable<BudgetDTO> Get(ApplicationUser user)
         {
-            return new string[] { "Come", "At me" };
+            return _service.Get(user);
         }
 
         // GET api/<BudgetController>/5

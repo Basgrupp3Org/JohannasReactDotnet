@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace JohannasReactProject.Models.Web
 {
-    public class EditBudgetDTO
+    public class BudgetDTO
     {
         public Guid Id { get; set; }
         public DateTime StartDate { get; set; }
