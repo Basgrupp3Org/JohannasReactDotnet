@@ -1,4 +1,5 @@
-﻿using JohannasReactProject.Models.Entities;
+﻿using JohannasReactProject.Models;
+using JohannasReactProject.Models.Entities;
 using JohannasReactProject.Models.Web;
 using System;
 using System.Collections.Generic;
@@ -11,5 +12,6 @@ namespace JohannasReactProject.Repositories.Abstract
     {
         Task Post(VariableCostsCategories variableCostsCategories);
         Task Edit(EditVariableCostCategoryDTO editVariableCostCategoryDTO);
+        IEnumerable<VariableCostCategoryDTO> Get(ApplicationUser applicationUser);
     }
 }

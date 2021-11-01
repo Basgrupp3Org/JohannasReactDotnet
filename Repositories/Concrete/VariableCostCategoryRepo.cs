@@ -1,7 +1,9 @@
 ﻿using JohannasReactProject.Data;
+using JohannasReactProject.Models;
 using JohannasReactProject.Models.Entities;
 using JohannasReactProject.Models.Web;
 using JohannasReactProject.Repositories.Abstract;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,8 +27,28 @@ namespace JohannasReactProject.Repositories.Concrete
             await _context.SaveChangesAsync();
         }
 
+        public IEnumerable<VariableCostCategoryDTO> Get(ApplicationUser applicationUser)
+        {
+            var returnList = new List<VariableCostCategoryDTO>();
+
+            var variableCostCateogry = _context.VariableCostsCategories.Where(x => x.User.Id == applicationUser.Id).ToList();
+           foreach(var item in variableCostCateogry)
+           {
+                returnList.Add(new VariableCostCategoryDTO
+                {
+                    Name = item.Name,
+                    Spent = item.Spent,
+                    ToSpend = item.ToSpend,
+                });
+           }
+            return returnList;
+        }
+
         public async Task Post(VariableCostsCategories variableCostsCategories)
         {
+            var user = variableCostsCategories.User.Id;
+            var person = _context.Users.Where(u => u.Id == user).FirstOrDefault();
+            variableCostsCategories.User = person;
             _context.VariableCostsCategories.Add(variableCostsCategories);
             await _context.SaveChangesAsync();
         }

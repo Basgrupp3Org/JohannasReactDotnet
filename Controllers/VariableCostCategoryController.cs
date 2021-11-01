@@ -1,4 +1,5 @@
-﻿using JohannasReactProject.Models.Entities;
+﻿using JohannasReactProject.Models;
+using JohannasReactProject.Models.Entities;
 using JohannasReactProject.Models.Web;
 using JohannasReactProject.Services.Abstract;
 using Microsoft.AspNetCore.Authorization;
@@ -22,9 +23,9 @@ namespace JohannasReactProject.Controllers
         public VariableCostCategoryController(IVariableCostCategoryService service) => _service = service;
         // GET: api/<VariableCostCategoryController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IEnumerable<VariableCostCategoryDTO> Get(ApplicationUser user)
         {
-            return new string[] { "value1", "value2" };
+            return _service.Get(user);
         }
 
         // GET api/<VariableCostCategoryController>/5
