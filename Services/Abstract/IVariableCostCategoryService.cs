@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using JohannasReactProject.Models;
 using JohannasReactProject.Models.Entities;
 using JohannasReactProject.Models.Web;
 
@@ -11,5 +12,6 @@ namespace JohannasReactProject.Services.Abstract
     {
         Task Post(VariableCostsCategories variableCostsCategories);
         Task Edit(EditVariableCostCategoryDTO editVariableCostCategoryDTO);
+        IEnumerable<VariableCostCategoryDTO> Get(ApplicationUser applicationUser);
     }
 }

@@ -20,7 +20,8 @@ namespace JohannasReactProject.Models.Entities
         public decimal ToSpend { get; set; }
         public decimal Spent { get; set; }
         public virtual ICollection<BudgetCategory> BudgetCategories { get; set; }
-
+        public virtual ApplicationUser User { get; set; }
+         
     }
 
     public class FixedCostsCategories : Entity
