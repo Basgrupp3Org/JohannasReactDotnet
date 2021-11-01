@@ -21,6 +21,7 @@ namespace JohannasReactProject.Models.Entities
         public decimal Spent { get; set; }
         public virtual ICollection<BudgetCategory> BudgetCategories { get; set; }
         public virtual ApplicationUser User { get; set; }
+        public virtual ICollection<Purchase> Purchases { get; set; }
          
     }
 

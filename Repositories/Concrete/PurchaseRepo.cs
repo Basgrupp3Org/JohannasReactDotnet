@@ -1,4 +1,5 @@
 ﻿using JohannasReactProject.Data;
+using JohannasReactProject.Models;
 using JohannasReactProject.Models.Entities;
 using JohannasReactProject.Models.Web;
 using JohannasReactProject.Repositories.Abstract;
@@ -28,8 +29,33 @@ namespace JohannasReactProject.Repositories.Concrete
             await _context.SaveChangesAsync();
         }
 
+        public ICollection<PurchaseDTO> Get(ApplicationUser applicationUser)
+        {
+            var returnList = new List<PurchaseDTO>();
+
+            var purchases = _context.Purchases.Where(x => x.User.Id == applicationUser.Id).ToList();
+
+            foreach(var item in purchases)
+            {
+                returnList.Add(new PurchaseDTO
+                {
+                    Price = item.Price,
+                    Date = item.Date,
+                    Name = item.Name
+                });
+            }
+
+            return returnList;
+        }
+
         public async Task Post(Purchase purchases)
         {
+            var user = purchases.User.Id;
+            var category = purchases.VariableCostsCategory.Id;
+            var person = _context.Users.Where(u => u.Id == user).FirstOrDefault();
+            var variableCategory = _context.VariableCostsCategories.Where(x => x.Id == category).FirstOrDefault();
+            purchases.VariableCostsCategory = variableCategory;
+            purchases.User = person;
             _context.Purchases.Add(purchases);
             await _context.SaveChangesAsync();
         }
