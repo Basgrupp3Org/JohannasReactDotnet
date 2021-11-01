@@ -10,7 +10,7 @@ namespace JohannasReactProject.Models.Entities
         public string Name { get; set; }
         public decimal Price { get; set; }
         public DateTime Date { get; set; }
-        //public virtual JohannasBaksidaUser User { get; set; }
-        //public VariableCostsCategories VariableCostsCategory { get; set; }
+        public virtual ApplicationUser User { get; set; }
+        public VariableCostsCategories VariableCostsCategory { get; set; }
     }
 }
