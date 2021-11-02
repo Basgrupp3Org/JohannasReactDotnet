@@ -2,10 +2,12 @@
 using JohannasReactProject.Models.Web;
 using JohannasReactProject.Services.Abstract;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -18,13 +20,17 @@ namespace JohannasReactProject.Controllers
     public class FixedCostCategoryController : ControllerBase
     {
         private readonly IFixedCostCategoryService _service;
-
-        public FixedCostCategoryController(IFixedCostCategoryService service) => _service = service;
+        private readonly string _userId;
+        public FixedCostCategoryController(IFixedCostCategoryService service, IHttpContextAccessor httpContextAccessor)
+        {
+            _service = service;
+            _userId = httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+        }
         // GET: api/<FixedCostCategoryController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IEnumerable<FixedCostCategoryDTO> Get()
         {
-            return new string[] { "value1", "value2" };
+            return _service.Get(_userId);
         }
 
         // GET api/<FixedCostCategoryController>/5
@@ -38,7 +44,7 @@ namespace JohannasReactProject.Controllers
         [HttpPost]
         public async Task Post([FromBody] FixedCostsCategories fixedCostCategories)
         {
-            await _service.Post(fixedCostCategories);
+            await _service.Post(fixedCostCategories, _userId);
         }
 
         // PUT api/<FixedCostCategoryController>/5

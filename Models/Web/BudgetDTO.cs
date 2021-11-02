@@ -12,5 +12,6 @@ namespace JohannasReactProject.Models.Web
         public DateTime EndDate { get; set; }
         public decimal Income { get; set; }
         public decimal Unbudgeted { get; set; }
+        public virtual ICollection<FixedCostCategoryDTO> fixedCostCategoryDTO { get; set; }
     }
 }

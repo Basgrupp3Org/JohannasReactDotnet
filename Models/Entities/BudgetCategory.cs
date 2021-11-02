@@ -29,7 +29,8 @@ namespace JohannasReactProject.Models.Entities
     {
         public string Name { get; set; }
         public decimal Cost { get; set; }
-        public virtual Budget Budget { get; set; }
+        public virtual ICollection<Budget> Budget { get; set; }
+        public virtual ApplicationUser User { get; set; }
 
     }
 }
