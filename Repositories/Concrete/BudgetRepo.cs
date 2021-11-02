@@ -27,11 +27,11 @@ namespace JohannasReactProject.Repositories.Concrete
             
         }
 
-        public IEnumerable<BudgetDTO> Get(ApplicationUser applicationUser)
+        public IEnumerable<BudgetDTO> Get(string userId)
         {
             var list = new List<BudgetDTO>();
 
-            var budget = _context.Budgets.Where(b => b.User.Id == applicationUser.Id).ToList();
+            var budget = _context.Budgets.Where(b => b.User.Id == userId).ToList();
             foreach (var item in budget)
             {
                 list.Add(new BudgetDTO
@@ -45,10 +45,9 @@ namespace JohannasReactProject.Repositories.Concrete
             return list;
         }
 
-        public async Task Post(Budget budget)
+        public async Task Post(Budget budget, string userId)
         {
-            var user = budget.User.Id;
-            var person = _context.Users.Where(u => u.Id == user).FirstOrDefault();
+            var person = _context.Users.Where(u => u.Id == userId).FirstOrDefault();
             budget.User = person;
             _context.Budgets.Add(budget);
            await _context.SaveChangesAsync();

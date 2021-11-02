@@ -12,6 +12,6 @@ namespace JohannasReactProject.Services.Abstract
     {
         Task Post(VariableCostsCategories variableCostsCategories);
         Task Edit(EditVariableCostCategoryDTO editVariableCostCategoryDTO);
-        IEnumerable<VariableCostCategoryDTO> Get(ApplicationUser applicationUser);
+        IEnumerable<VariableCostCategoryDTO> Get(string userId);
     }
 }

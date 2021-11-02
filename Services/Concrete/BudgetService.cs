@@ -19,14 +19,14 @@ namespace JohannasReactProject.Services.Concrete
             await _budgetRepo.Edit(budget);
         }
 
-        public IEnumerable<BudgetDTO> Get(ApplicationUser applicationUser)
+        public IEnumerable<BudgetDTO> Get(string userId)
         {
-            return _budgetRepo.Get(applicationUser);
+            return _budgetRepo.Get(userId);
         }
 
-        public async Task Post(Budget budget)
+        public async Task Post(Budget budget, string userId)
         {
-           await _budgetRepo.Post(budget);
+           await _budgetRepo.Post(budget, userId);
         }
     }
 }

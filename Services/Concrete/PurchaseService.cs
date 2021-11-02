@@ -19,14 +19,14 @@ namespace JohannasReactProject.Services.Concrete
             await _purchaseRepo.Edit(purchase);
         }
 
-        public ICollection<PurchaseDTO> Get(ApplicationUser applicationUser)
+        public ICollection<PurchaseDTO> Get(string userId)
         {
-            return _purchaseRepo.Get(applicationUser);
+            return _purchaseRepo.Get(userId);
         }
 
-        public async Task Post(Purchase purchase)
+        public async Task Post(Purchase purchase, string userId)
         {
-            await _purchaseRepo.Post(purchase);
+            await _purchaseRepo.Post(purchase, userId);
         }
     }
 }

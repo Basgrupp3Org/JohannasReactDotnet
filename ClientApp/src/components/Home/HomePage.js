@@ -9,44 +9,46 @@ import BigSavingGoal from './BigSavingGoal'
 export default function HomePage() {
     const [budgetData, setBudgetData] = useState([]);
     const [purchaseData, setPurchaseData] = useState([]);
-    useEffect(() => {
-
-        async function fetchMyAPI() {
-           
-
-            const token = await authService.getAccessToken();
-            const response = await fetch('api/Budget', {
-                headers: !token ? {} : { 'Authorization': `Bearer ${token}` }
-            });
-            const data = await response.json();
-            setBudgetData(data)
-        }
-
-        fetchMyAPI()
-
-
-    }, []);
-
     //useEffect(() => {
-
-    //    fetch('Budget.json', {
-    //        method: "GET",
-    //        headers: {
-    //            'Content-Type': 'application/json',
-    //            'Accept': 'application/json'
-    //        },
-
-    //    })
-    //        .then((data) => data.json())
-    //        .then((data) => {
-    //            setBudgetData(data)
-    //        })
-    //        .catch((err) => {
-    //            console.error(err);
+    //    async function fetchMyAPI() {
+    //        const token = await authService.getAccessToken();
+    //        const response = await fetch('api/budget', {
+    //            headers: !token ? {} : { 'Authorization': `Bearer ${token}` }
     //        });
+    //        const data = await response.json();
+    //        setBudgetData(data)
+    //    }
 
+    //    fetchMyAPI()
 
     //}, []);
+
+    const fetchBudgets = () => {
+        const token = authService.getAccessToken();
+        console.log(token)
+        fetch('api/budget', {
+            method: "GET",
+            headers: !token ? {} : {
+                'Authorization': "Bearer " + token,
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+
+        })
+            /*.then((data) => data.json())*/
+            .then((data) => {
+                setBudgetData(data)
+            })
+            .catch((err) => {
+                console.error(err);
+            });
+
+    }
+
+    useEffect(() => {
+        fetchBudgets()
+
+    }, []);
 
     //useEffect(() => {
 

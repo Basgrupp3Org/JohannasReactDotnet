@@ -29,12 +29,11 @@ namespace JohannasReactProject.Repositories.Concrete
             await _context.SaveChangesAsync();
         }
 
-        public ICollection<PurchaseDTO> Get(ApplicationUser applicationUser)
+        public ICollection<PurchaseDTO> Get(string userId)
         {
             var returnList = new List<PurchaseDTO>();
-
-            var purchases = _context.Purchases.Where(x => x.User.Id == applicationUser.Id).ToList();
-
+            var purchases = _context.Purchases.Where(x => x.User.Id == userId).ToList();
+            
             foreach(var item in purchases)
             {
                 returnList.Add(new PurchaseDTO

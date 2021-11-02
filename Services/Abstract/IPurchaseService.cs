@@ -12,6 +12,6 @@ namespace JohannasReactProject.Services.Abstract
     {
         Task Post(Purchase purchase);
         Task Edit(EditPurchaseDTO editPurchase);
-        ICollection<PurchaseDTO> Get(ApplicationUser applicationUser);
+        ICollection<PurchaseDTO> Get(string userId);
     }
 }

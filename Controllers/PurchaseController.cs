@@ -3,10 +3,12 @@ using JohannasReactProject.Models.Entities;
 using JohannasReactProject.Models.Web;
 using JohannasReactProject.Services.Abstract;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -19,13 +21,19 @@ namespace JohannasReactProject.Controllers
     public class PurchaseController : ControllerBase
     {
         private readonly IPurchaseService _service;
+        private readonly string _userId;
+        public PurchaseController(IPurchaseService service, IHttpContextAccessor httpContextAccessor)
+        {
+            _service = service;
+            _userId = httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+        }
 
         public PurchaseController(IPurchaseService service) => _service = service;
         // GET: api/<PurchaseController>
         [HttpGet]
-        public IEnumerable<PurchaseDTO> Get(ApplicationUser user)
+        public IEnumerable<PurchaseDTO> Get()
         {
-            return _service.Get(user);
+            return _service.Get(_userId);
         }
 
         // GET api/<PurchaseController>/5

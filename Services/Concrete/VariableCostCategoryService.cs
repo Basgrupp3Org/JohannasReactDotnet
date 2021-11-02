@@ -20,14 +20,14 @@ namespace JohannasReactProject.Services.Concrete
             await _variableCostCategoryRepo.Edit(editVariableCostCategoryDTO);
         }
 
-        public IEnumerable<VariableCostCategoryDTO> Get(ApplicationUser applicationUser)
+        public IEnumerable<VariableCostCategoryDTO> Get(string userId)
         {
-           return _variableCostCategoryRepo.Get(applicationUser);
+           return _variableCostCategoryRepo.Get(userId);
         }
 
-        public async Task Post(VariableCostsCategories variableCostsCategories)
+        public async Task Post(VariableCostsCategories variableCostsCategories, string userId)
         {
-            await _variableCostCategoryRepo.Post(variableCostsCategories);
+            await _variableCostCategoryRepo.Post(variableCostsCategories, userId);
         }
     }
 }

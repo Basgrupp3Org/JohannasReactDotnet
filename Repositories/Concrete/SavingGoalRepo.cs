@@ -24,8 +24,31 @@ namespace JohannasReactProject.Repositories.Concrete
             await _context.SaveChangesAsync();
         }
 
-        public async Task Post(SavingGoal savingGoal)
+        public IEnumerable<SavingGoalDTO> Get(string userId)
         {
+            var returnList = new List<SavingGoalDTO>();
+            var savingGoals = _context.SavingGoals.Where(x => x.User.Id == userId).ToList();
+          
+
+            foreach (var item in savingGoals)
+            {
+                returnList.Add(new SavingGoalDTO
+                {
+                    Name = item.Name,
+                    Saved = item.Saved,
+                    ToSave = item.ToSave
+                    
+                });
+            }
+
+            return returnList;
+        }
+
+        public async Task Post(SavingGoal savingGoal, string userId)
+        {
+            
+            var person = _context.Users.Where(u => u.Id == userId).FirstOrDefault();
+            savingGoal.User = person;
             _context.SavingGoals.Add(savingGoal);
             await _context.SaveChangesAsync();
         }
