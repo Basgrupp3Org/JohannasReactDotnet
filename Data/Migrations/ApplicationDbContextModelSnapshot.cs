@@ -19,6 +19,21 @@ namespace JohannasReactProject.Data.Migrations
                 .HasAnnotation("ProductVersion", "5.0.6")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("BudgetFixedCostsCategories", b =>
+                {
+                    b.Property<Guid>("BudgetId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("FixedCostsCategoriesId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("BudgetId", "FixedCostsCategoriesId");
+
+                    b.HasIndex("FixedCostsCategoriesId");
+
+                    b.ToTable("BudgetFixedCostsCategories");
+                });
+
             modelBuilder.Entity("IdentityServer4.EntityFramework.Entities.DeviceFlowCodes", b =>
                 {
                     b.Property<string>("UserCode")
@@ -245,18 +260,18 @@ namespace JohannasReactProject.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("BudgetId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<decimal>("Cost")
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("BudgetId");
+                    b.HasIndex("UserId");
 
                     b.ToTable("FixedCostsCategories");
                 });
@@ -476,6 +491,21 @@ namespace JohannasReactProject.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("BudgetFixedCostsCategories", b =>
+                {
+                    b.HasOne("JohannasReactProject.Models.Entities.Budget", null)
+                        .WithMany()
+                        .HasForeignKey("BudgetId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("JohannasReactProject.Models.Entities.FixedCostsCategories", null)
+                        .WithMany()
+                        .HasForeignKey("FixedCostsCategoriesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("JohannasReactProject.Models.Entities.Budget", b =>
                 {
                     b.HasOne("JohannasReactProject.Models.ApplicationUser", "User")
@@ -502,11 +532,11 @@ namespace JohannasReactProject.Data.Migrations
 
             modelBuilder.Entity("JohannasReactProject.Models.Entities.FixedCostsCategories", b =>
                 {
-                    b.HasOne("JohannasReactProject.Models.Entities.Budget", "Budget")
+                    b.HasOne("JohannasReactProject.Models.ApplicationUser", "User")
                         .WithMany("FixedCostsCategories")
-                        .HasForeignKey("BudgetId");
+                        .HasForeignKey("UserId");
 
-                    b.Navigation("Budget");
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("JohannasReactProject.Models.Entities.Purchase", b =>
@@ -597,6 +627,8 @@ namespace JohannasReactProject.Data.Migrations
                 {
                     b.Navigation("Budget");
 
+                    b.Navigation("FixedCostsCategories");
+
                     b.Navigation("Purchases");
 
                     b.Navigation("SavingGoals");
@@ -607,8 +639,6 @@ namespace JohannasReactProject.Data.Migrations
             modelBuilder.Entity("JohannasReactProject.Models.Entities.Budget", b =>
                 {
                     b.Navigation("BudgetCategories");
-
-                    b.Navigation("FixedCostsCategories");
                 });
 
             modelBuilder.Entity("JohannasReactProject.Models.Entities.VariableCostsCategories", b =>

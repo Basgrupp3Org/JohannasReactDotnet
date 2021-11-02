@@ -18,9 +18,14 @@ namespace JohannasReactProject.Services.Concrete
            await _fixedCostCategoryRepo.Edit(editFixedCostCategoryDTO);
         }
 
-        public async Task Post(FixedCostsCategories fixedCostsCategories)
+        public IEnumerable<FixedCostCategoryDTO> Get(string userId)
         {
-            await _fixedCostCategoryRepo.Post(fixedCostsCategories);
+            return _fixedCostCategoryRepo.Get(userId);
+        }
+
+        public async Task Post(FixedCostsCategories fixedCostsCategories, string userId)
+        {
+            await _fixedCostCategoryRepo.Post(fixedCostsCategories, userId);
         }
     }
 }

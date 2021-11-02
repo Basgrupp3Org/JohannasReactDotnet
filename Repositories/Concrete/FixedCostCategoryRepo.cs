@@ -24,8 +24,25 @@ namespace JohannasReactProject.Repositories.Concrete
             await _context.SaveChangesAsync();
         }
 
-        public async Task Post(FixedCostsCategories fixedCostsCategories)
+        public IEnumerable<FixedCostCategoryDTO> Get(string userId)
         {
+            var returnList = new List<FixedCostCategoryDTO>();
+            var fixedCostCateogry = _context.FixedCostsCategories.Where(x => x.User.Id == userId).ToList();
+            foreach (var item in fixedCostCateogry)
+            {
+                returnList.Add(new FixedCostCategoryDTO
+                {
+                    Name = item.Name,
+                    Cost = item.Cost
+                });
+            }
+            return returnList;
+        }
+
+        public async Task Post(FixedCostsCategories fixedCostsCategories, string userId)
+        {
+            var person = _context.Users.Where(u => u.Id == userId).FirstOrDefault();
+            fixedCostsCategories.User = person;
             _context.FixedCostsCategories.Add(fixedCostsCategories);
             await _context.SaveChangesAsync();
         }
