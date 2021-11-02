@@ -47,7 +47,7 @@ namespace JohannasReactProject.Controllers
         [HttpPost]
         public async Task Post([FromBody] Purchase purchase)
         {
-            await _service.Post(purchase);
+            await _service.Post(purchase, _userId);
         }
 
 

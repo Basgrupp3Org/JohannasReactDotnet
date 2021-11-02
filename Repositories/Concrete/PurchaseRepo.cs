@@ -47,11 +47,11 @@ namespace JohannasReactProject.Repositories.Concrete
             return returnList;
         }
 
-        public async Task Post(Purchase purchases)
+        public async Task Post(Purchase purchases, string userId)
         {
-            var user = purchases.User.Id;
+          
             var category = purchases.VariableCostsCategory.Id;
-            var person = _context.Users.Where(u => u.Id == user).FirstOrDefault();
+            var person = _context.Users.Where(u => u.Id == userId).FirstOrDefault();
             var variableCategory = _context.VariableCostsCategories.Where(x => x.Id == category).FirstOrDefault();
             purchases.VariableCostsCategory = variableCategory;
             purchases.User = person;

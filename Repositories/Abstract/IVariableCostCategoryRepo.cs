@@ -10,7 +10,7 @@ namespace JohannasReactProject.Repositories.Abstract
 {
     public interface IVariableCostCategoryRepo
     {
-        Task Post(VariableCostsCategories variableCostsCategories);
+        Task Post(VariableCostsCategories variableCostsCategories, string userId);
         Task Edit(EditVariableCostCategoryDTO editVariableCostCategoryDTO);
         IEnumerable<VariableCostCategoryDTO> Get(string userId);
     }

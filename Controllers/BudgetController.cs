@@ -47,7 +47,7 @@ namespace JohannasReactProject.Controllers
         [HttpPost]
         public async Task Post([FromBody] Budget budget)
         {
-            await _service.Post(budget);
+            await _service.Post(budget, _userId);
         }
 
         // PUT api/<BudgetController>/5
