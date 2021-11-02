@@ -46,7 +46,7 @@ namespace JohannasReactProject.Controllers
         [HttpPost]
         public async Task Post([FromBody] VariableCostsCategories variableCostsCategories)
         {
-            await _service.Post(variableCostsCategories);
+            await _service.Post(variableCostsCategories, _userId);
         }
 
         // PUT api/<VariableCostCategoryController>/5

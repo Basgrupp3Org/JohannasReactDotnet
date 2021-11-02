@@ -10,7 +10,7 @@ namespace JohannasReactProject.Repositories.Abstract
 {
     public interface IBudgetRepo
     {
-        Task Post(Budget budget);
+        Task Post(Budget budget, string userId);
         Task Edit(EditBudgetDTO budget);
         IEnumerable<BudgetDTO> Get(string userId);
     }
