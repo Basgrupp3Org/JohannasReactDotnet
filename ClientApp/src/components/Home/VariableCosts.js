@@ -1,20 +1,31 @@
 ﻿import React, { useEffect, useState } from 'react'
 import { CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
+import authService from '../api-authorization/AuthorizeService'
+
 
 
 export default function VariableCosts(props) {
     const [variableCosts, setVariableCosts] = useState([])
 
-    useEffect(() => {
-        if (props.data.rörliga) {
-            setVariableCosts(props.data.rörliga)
+    useEffect  (() => {
+        async function fetchVariableCosts() {
+            const token = await authService.getAccessToken();
+            const response = await fetch('api/variablecostcategory', {
+                headers: !token ? {} : { 'Authorization': `Bearer ${token}` }
+            });
+            const data = await response.json()
+            console.log(data)
+            setVariableCosts(data)
         }
-    }, [props.data.rörliga])
+
+        fetchVariableCosts()
+
+    }, [])
 
 
     function percentage(partialValue, totalValue) {
-        return (100 * partialValue) / totalValue;
+        return ((100 * partialValue) / totalValue).toFixed(2);
     }
 
     return (
@@ -25,9 +36,9 @@ export default function VariableCosts(props) {
 
                 variableCosts.map((x, i) => (
                     <div key={i}>
-                        <label className="variablecosts__name_label">{x.namn}</label>
+                        <label className="variablecosts__name_label">{x.name}</label>
                         <div className="variablecosts__progressbar_div" style={{ width: 80, height: 75 }}>
-                            <CircularProgressbar value={percentage(x.spenderat, x.attSpendera)} text={`${percentage(x.spenderat, x.attSpendera)}%`} />
+                            <CircularProgressbar value={percentage(x.spent, x.toSpend)} text={`${percentage(x.spent, x.toSpend)}%`} />
                         </div>
                     </div>
 

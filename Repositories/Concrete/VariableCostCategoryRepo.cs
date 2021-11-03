@@ -43,11 +43,38 @@ namespace JohannasReactProject.Repositories.Concrete
             return returnList;
         }
 
+        public IEnumerable<VariableCostCategoryDTO> GetForCurrentBudget(string userId)
+        {
+          var returnList = new List<VariableCostCategoryDTO>();
+
+            
+            var budgetCategories = _context.BudgetCategories.Where(x => userId == x.User.Id).Include("VariableCostsCategories").ToList();
+            
+                foreach(var item in budgetCategories)
+            {
+                returnList.Add(new VariableCostCategoryDTO
+                {
+                    Name = item.VariableCostsCategory.Name,
+                    Spent = item.VariableCostsCategory.Spent,
+                    ToSpend = item.VariableCostsCategory.ToSpend
+                });
+            }
+
+            return returnList;
+        }
+
         public async Task Post(VariableCostsCategories variableCostsCategories, string userId)
         {
             var person = _context.Users.Where(u => u.Id == userId).FirstOrDefault();
+            var budget = _context.Budgets.Where(b => b.User == person).OrderByDescending(b => b.StartDate).FirstOrDefault();
             variableCostsCategories.User = person;
             _context.VariableCostsCategories.Add(variableCostsCategories);
+            var budgetCategory = new BudgetCategory();
+            budgetCategory.Budget = budget;
+            budgetCategory.User = person;
+            budgetCategory.VariableCostsCategory = variableCostsCategories;
+            budgetCategory.MaxSpent = variableCostsCategories.ToSpend;
+            _context.BudgetCategories.Add(budgetCategory);
             await _context.SaveChangesAsync();
         }
     }

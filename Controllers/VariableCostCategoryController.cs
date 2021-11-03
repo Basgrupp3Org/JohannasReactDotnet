@@ -35,6 +35,12 @@ namespace JohannasReactProject.Controllers
             return _service.Get(_userId);
         }
 
+        [HttpGet("forcurrentbudget")]
+        public IEnumerable<VariableCostCategoryDTO> GetForCurrentBudget()
+        {
+            return _service.GetForCurrentBudget(_userId);
+        }
+
         // GET api/<VariableCostCategoryController>/5
         [HttpGet("{id}")]
         public string Get(int id)

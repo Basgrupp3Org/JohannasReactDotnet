@@ -4,12 +4,12 @@ import RegisterPurchaseModal from './RegisterPurchaseModal.js'
 
 export default function LastTransaction(props) {
     const [lastTransaction, setLastTransaction] = useState([])
-
+console.log(props);
     useEffect(() => {
-        if (props.data.purchase) {
-            setLastTransaction(props.data.purchase)
+        if (props.data) {
+            setLastTransaction(props.data)
         }
-    }, [props.data.purchase])
+    }, [props.data])
 
 
 
@@ -22,14 +22,10 @@ export default function LastTransaction(props) {
                 <label className="lasttransaction__BuyLabel_label">Senaste transaktionerna</label>
 
             </div>
-
-
-
-
-            {lastTransaction.map((x, i) =>
+            {lastTransaction.reverse().slice(0, 5).map((x, i) =>
                 <div key={i} className="lasttransaction__contentdiv">
-                    <label className="lasttransaction__purchaseName_label">{x.köpNamn} </label>
-                    <label className="lasttransaction__dateforpurchase_label">{x.pris}kr <label className="lasttransaction__priceforpurchase_label">{x.datum} </label></label>
+                    <label className="lasttransaction__purchaseName_label">{x.name} </label>
+                    <label className="lasttransaction__dateforpurchase_label">{x.price}kr <label className="lasttransaction__priceforpurchase_label">{x.datum} </label></label>
                 </div>
             )}
             <div className="lasttransaction__ButtonDiv">

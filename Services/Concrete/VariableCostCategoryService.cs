@@ -25,6 +25,11 @@ namespace JohannasReactProject.Services.Concrete
            return _variableCostCategoryRepo.Get(userId);
         }
 
+        public IEnumerable<VariableCostCategoryDTO> GetForCurrentBudget(string userId)
+        {
+            return _variableCostCategoryRepo.GetForCurrentBudget(userId);
+        }
+
         public async Task Post(VariableCostsCategories variableCostsCategories, string userId)
         {
             await _variableCostCategoryRepo.Post(variableCostsCategories, userId);

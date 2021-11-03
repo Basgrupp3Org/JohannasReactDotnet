@@ -1,4 +1,4 @@
-﻿import { React, useState, useEffect } from 'react'
+﻿import React, { useState, useEffect } from 'react'
 import { CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 
@@ -6,11 +6,11 @@ export default function BigSavingGoal(props) {
     const [bigSavingGoal, setBigSavingGoal] = useState([])
 
     useEffect(() => {
-        if (props.data.sparmål) {
-            setBigSavingGoal(props.data.sparmål)
+        if (props.data) {
+            setBigSavingGoal(props.data)
         }
 
-    }, [props.data.sparmål])
+    }, [props.data])    
 
     function percentage(partialValue, totalValue) {
         return (100 * partialValue) / totalValue;
@@ -26,10 +26,10 @@ export default function BigSavingGoal(props) {
                     bigSavingGoal.map((x, i) => (
                         <div key={i} className="bigsavinggoal__contentdiv2">
                             <div className="bigsavinggoal__progressbar" style={{ width: 250, height: 250 }}>
-                                <label className="bigsavinggoal__LabelSaving1">{x.namn}</label>
-                                <CircularProgressbar value={percentage(x.sparat, x.attSpara)} text={`${percentage(x.sparat, x.attSpara)}%`} />
-                                <label className="bigsavinggoal__LabelSaving3" >Sparat: {x.sparat}</label>
-                                <label className="bigsavinggoal__LabelSaving3">Mål: {x.attSpara}</label>
+                                <label className="bigsavinggoal__LabelSaving1">{x.name}</label>
+                                <CircularProgressbar value={percentage(x.saved, x.toSave)} text={`${percentage(x.saved, x.toSave)}%`} />
+                                <label className="bigsavinggoal__LabelSaving3" >Sparat: {x.saved}</label>
+                                <label className="bigsavinggoal__LabelSaving3">Mål: {x.toSave}</label>
                             </div>
                         </div>
                     ))
