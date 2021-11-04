@@ -1,4 +1,4 @@
-﻿import React, {useState, useEffect } from "react";
+﻿import React, { useState, useEffect } from "react";
 import "../History/HistoryPage.css";
 import Budgets from "./components/Budgets";
 import Transactions from "./components/Transactions";
@@ -15,31 +15,36 @@ import {
 export default function HistoryPage() {
     let { path, url } = useRouteMatch();
     const [budgetData, setBudgetData] = useState([]);
+    const [purchaseData, setPurchaseData] = useState([]);
 
-    const fetchBudgets = () => {
-        const token = authService.getAccessToken();
-        console.log(token)
-        fetch('api/budget', {
-            method: "GET",
-            headers: !token ? {} : {
-                'Authorization': "Bearer " + token,
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            },
-
-        })
-            /*.then((data) => data.json())*/
-            .then((data) => {
-                setBudgetData(data)
-            })
-            .catch((err) => {
-                console.error(err);
-            });
-
-    }
 
     useEffect(() => {
-        fetchBudgets()
+        async function fetchMyAPI() {
+            const token = await authService.getAccessToken();
+            const response = await fetch('api/budget', {
+                headers: !token ? {} : { 'Authorization': `Bearer ${token}` }
+            });
+            const data = await response.json();
+            console.log(data)
+            setBudgetData(data[data.length - 1])
+        }
+
+        fetchMyAPI()
+
+    }, []);
+
+    useEffect(() => {
+        async function fetchPurchases() {
+            const token = await authService.getAccessToken();
+            const response = await fetch('api/purchase', {
+                headers: !token ? {} : { 'Authorization': `Bearer ${token}` }
+            });
+            const data = await response.json()
+            console.log(data)
+            setPurchaseData(data)
+        }
+
+        fetchPurchases()
 
     }, []);
 
@@ -66,10 +71,10 @@ export default function HistoryPage() {
 
                     <Switch>
                         <Route exact path="/history">
-                            <Budgets data={budgetData} />
+                            {budgetData ? < Budgets data={budgetData} /> : "Loading..."}
                         </Route>
                         <Route exact path="/transactions">
-                            <Transactions />
+                            {purchaseData ? <Transactions data={purchaseData} /> : "Loading..."}
                         </Route>
                     </Switch>
                 </div>

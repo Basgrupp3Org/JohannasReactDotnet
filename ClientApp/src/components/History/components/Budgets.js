@@ -5,6 +5,7 @@ import BudgetData from "./BudgetData";
 
 export default function Budgets(props) {
     const [active, setActive] = useState("");
+    console.log(props.data);
 
     return (
         <>
@@ -27,11 +28,11 @@ export default function Budgets(props) {
             </div>
             <div className="__line2"></div>
             <div className="__history-content">
-                <h2>Budget för Maj</h2>
+                <h2>{props.data.name}</h2>
                 <div className="from-to-date">
-                    <p>2021-05-01</p>
+                    <p>{props.data.startDate}</p>
                     <p>-</p>
-                    <p>2021-05-31</p>
+                    <p>{props.data.endDate}</p>
                 </div>
             </div>
             <div className="__history-table">

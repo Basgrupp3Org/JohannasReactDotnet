@@ -1,9 +1,18 @@
-﻿import React from "react";
+﻿import React, { useState, useEffect } from "react";
 
-const Transactions = () => {
+const Transactions = (props) => {
+    const [transaction, setTransaction] = useState([])
+    console.log(props.data[0]);
+
+    useEffect(() => {
+        if (props.data) {
+            setTransaction(props.data)
+        }
+    }, [props.data])
+
     return (
         <>
-            
+
             <div className="__transaction-inputs">
                 <form>
                     <label>Datum från:</label>
@@ -15,9 +24,12 @@ const Transactions = () => {
                     <button className="__filter-btn">Filtrera</button>
                 </form>
             </div>
+
+
             <input type="text" className="__search-table" placeholder="Sök"></input>
+
             <div className="__table-wrapper">
-                <table className="__transactions-table">
+                {/* <table className="__transactions-table">
                     <thead>
                         <tr>
                             <th>Namn</th>
@@ -26,17 +38,28 @@ const Transactions = () => {
                     </thead>
                     <tbody>
                         <tr>
-                            <td>Mat</td>
-                            <td>500</td>
+                            <td>{props.data.name}</td>
+                            <td>{props.data.price}</td>
                         </tr>
                         <tr>
-                            <td>Glass</td>
-                            <td>25</td>
+                            <td>{props.data.name}</td>
+                            <td>{props.data.price}</td>
                         </tr>
                     </tbody>
-                </table>
+                </table> */}
+                <div className="__transaction-headers">
+                    <h3>Namn</h3>
+                    <h3>Pris</h3>
                 </div>
-                
+
+                {transaction.reverse().slice(0, 5).map((x, i) =>
+                    <div key={i} className="__transactions-table">
+                        <p>{x.name}</p>
+                        <p>{x.price}kr </p>
+                    </div>
+                )}
+            </div>
+
         </>
     );
 };

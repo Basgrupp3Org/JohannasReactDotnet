@@ -12,6 +12,7 @@ ul {
     list-style-type: none;
     text-align: center;
     font-size: 18px;
+    margin: 0;
 }
 
 li {
@@ -130,6 +131,18 @@ form {
     display: inline-block;
 }
 
+.__transaction-headers {
+    display: flex;
+    /* grid-row: 2 / 3; */
+    /* grid-column: 1 / 8; */
+    align-content: center;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+}
+
 .__history-nav-btn {
     text-decoration: none;
     color: #ABB2BF;
@@ -186,9 +199,8 @@ form {
 .__search-table {
     width: inherit;
     height: 25%;
-    grid-row: 3 / 3;
-    grid-column: 2 / 6;
-    margin-top: 75px;
+    grid-row: 3 / 5;
+    grid-column: 2 / 7;
     background-color: #abb2bf4f;
     color: #fff;
 }
@@ -196,10 +208,17 @@ form {
 .__table-wrapper {
     grid-row: 4 / 6;
     grid-column: 2 / 8;
+    width: 83%;
 }
 
 .__transactions-table {
+    display: flex;
     text-decoration: none;
     padding: 0;
     table-layout: fixed;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: space-between;
+    align-items: center;
 }
