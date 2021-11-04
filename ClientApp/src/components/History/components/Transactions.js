@@ -3,20 +3,21 @@
 const Transactions = () => {
     return (
         <>
-            <div className="transaction-inputs">
+            
+            <div className="__transaction-inputs">
                 <form>
                     <label>Datum från:</label>
-                    <input type="date" className="filter-input" />
+                    <input type="date" className="__filter-input" />
                     <label>Datum till:</label>
-                    <input type="date" className="filter-input" />
+                    <input type="date" className="__filter-input" />
                     <label>Kategori:</label>
-                    <input type="text" className="filter-input" placeholder="Välj" />
-                    <button className="filter-btn">Filtrera</button>
+                    <input type="text" className="__filter-input" placeholder="Välj" />
+                    <button className="__filter-btn">Filtrera</button>
                 </form>
             </div>
-            <input type="text" className="search-table" placeholder="Sök"></input>
-            <div className="table-wrapper">
-                <table className="transactions-table">
+            <input type="text" className="__search-table" placeholder="Sök"></input>
+            <div className="__table-wrapper">
+                <table className="__transactions-table">
                     <thead>
                         <tr>
                             <th>Namn</th>
@@ -34,7 +35,8 @@ const Transactions = () => {
                         </tr>
                     </tbody>
                 </table>
-            </div>
+                </div>
+                
         </>
     );
 };
