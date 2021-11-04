@@ -3,29 +3,30 @@ import HistorySidebar from "./HistorySidebar";
 import BudgetData from "./BudgetData";
 
 
-export default function Budgets() {
+export default function Budgets(props) {
     const [active, setActive] = useState("");
+
     return (
         <>
-            <div className="history-sidebar">
+            <div className="__history-sidebar">
                 <ul>
                     <li>
-                        <button className="budget-btn" onClick={() => active ? setActive("") : setActive("FirstCard")}>2021</button>
+                        <button className="__budget-btn" onClick={() => active ? setActive("") : setActive("FirstCard")}>2021</button>
                         {active === "FirstCard" && <HistorySidebar data={BudgetData} cardIndex={0} />}
                     </li>
                     <li>
-                        <button className="budget-btn" onClick={() => active ? setActive("") : setActive("SecondCard")}>2020</button>
+                        <button className="__budget-btn" onClick={() => active ? setActive("") : setActive("SecondCard")}>2020</button>
                         {active === "SecondCard" && <HistorySidebar data={BudgetData} cardIndex={1} />}
                     </li>
                     <li>
-                        <button className="budget-btn" onClick={() => active ? setActive("") : setActive("ThirdCard")}>2019</button>
+                        <button className="__budget-btn" onClick={() => active ? setActive("") : setActive("ThirdCard")}>2019</button>
                         {active === "ThirdCard" && <HistorySidebar data={BudgetData} cardIndex={2} />}
                     </li>
                 </ul>
 
             </div>
-            <div className="line2"></div>
-            <div className="history-content">
+            <div className="__line2"></div>
+            <div className="__history-content">
                 <h2>Budget för Maj</h2>
                 <div className="from-to-date">
                     <p>2021-05-01</p>
@@ -33,7 +34,7 @@ export default function Budgets() {
                     <p>2021-05-31</p>
                 </div>
             </div>
-            <div className="history-table">
+            <div className="__history-table">
                 <table>
                     <thead>
                         <tr>
