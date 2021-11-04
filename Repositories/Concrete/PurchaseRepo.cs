@@ -50,10 +50,10 @@ namespace JohannasReactProject.Repositories.Concrete
         public async Task Post(Purchase purchases, string userId)
         {
           
-            var category = purchases.VariableCostsCategory.Id;
+            //var category = purchases.VariableCostsCategory.Id;
             var person = _context.Users.Where(u => u.Id == userId).FirstOrDefault();
-            var variableCategory = _context.VariableCostsCategories.Where(x => x.Id == category).FirstOrDefault();
-            purchases.VariableCostsCategory = variableCategory;
+            //var variableCategory = _context.VariableCostsCategories.Where(x => x.Id == category).FirstOrDefault();
+            //purchases.VariableCostsCategory = variableCategory;
             purchases.User = person;
             _context.Purchases.Add(purchases);
             await _context.SaveChangesAsync();

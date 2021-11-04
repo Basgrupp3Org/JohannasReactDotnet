@@ -39,11 +39,14 @@ namespace JohannasReactProject.Repositories.Concrete
             return returnList;
         }
 
-        public async Task Post(FixedCostsCategories fixedCostsCategories, string userId)
+        public async Task Post(FixedCostsCategories fixedCostsCategory, string userId)
         {
+            var budget = _context.Budgets.Where(b => b.User.Id == userId).OrderByDescending(b => b.StartDate).FirstOrDefault();
+            budget.FixedCostsCategories.Add(fixedCostsCategory);
+            budget.Unbudgeted -= fixedCostsCategory.Cost;
             var person = _context.Users.Where(u => u.Id == userId).FirstOrDefault();
-            fixedCostsCategories.User = person;
-            _context.FixedCostsCategories.Add(fixedCostsCategories);
+            fixedCostsCategory.User = person;
+            _context.FixedCostsCategories.Add(fixedCostsCategory);
             await _context.SaveChangesAsync();
         }
     }

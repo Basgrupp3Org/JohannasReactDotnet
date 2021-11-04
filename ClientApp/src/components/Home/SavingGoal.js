@@ -2,12 +2,12 @@
 
 export default function SavingGoal(props) {
     const [savingGoal, setSavingGoal] = useState([])
-
+console.log(props);
     useEffect(() => {
-        if (props.data.sparmål) {
-            setSavingGoal(props.data.sparmål)
+        if (props.data) {
+            setSavingGoal(props.data)
         }
-    }, [props.data.sparmål])
+    }, [props.data])
 
     return (
 
@@ -21,7 +21,7 @@ export default function SavingGoal(props) {
 
                 {savingGoal.map((x, i) => (
                     <div key={i} className="savinggoal__divformap">
-                        <label className="savinggoal__content_label">{x.namn}</label> <label className="savinggoal__content_label2"> Att Spara: {x.attSpara}</label> <label className="savinggoal__content_label3">Sparat: {x.sparat}</label>
+                        <label className="savinggoal__content_label">{x.name}</label> <label className="savinggoal__content_label2"> Att Spara: {x.toSave} kr</label> <label className="savinggoal__content_label3">Sparat: {x.saved} kr</label>
                     </div>
                 ))}
 

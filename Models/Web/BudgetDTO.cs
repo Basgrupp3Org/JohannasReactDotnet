@@ -8,10 +8,11 @@ namespace JohannasReactProject.Models.Web
     public class BudgetDTO
     {
         public Guid Id { get; set; }
-        public DateTime StartDate { get; set; }
-        public DateTime EndDate { get; set; }
+        public string StartDate { get; set; }
+        public string EndDate { get; set; }
         public decimal Income { get; set; }
         public decimal Unbudgeted { get; set; }
         public virtual ICollection<FixedCostCategoryDTO> fixedCostCategoryDTO { get; set; }
+        public string Name { get; set; }
     }
 }

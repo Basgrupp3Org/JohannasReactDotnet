@@ -1,14 +1,15 @@
-﻿import { React, useEffect, useState } from 'react'
+﻿import React, { useEffect, useState } from 'react'
 import './HomePage.css'
 
 export default function Income(props) {
     const [income, setIncome] = useState([])
+    console.log(income)
 
     useEffect(() => {
-        if (props.data.inkomst) {
-            setIncome(props.data.inkomst)
+        if (props.data.income) {
+            setIncome(props.data.income)
         }
-    }, [props.data.inkomst])
+    }, [props.data.income])
 
 
     return (
@@ -19,6 +20,8 @@ export default function Income(props) {
             <div className="income__contentdiv">
                 <label>{income}</label>
             </div>
+            
         </div>
     )
+
 }

@@ -4,14 +4,16 @@ using JohannasReactProject.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace JohannasReactProject.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211102143342_Budgethasname")]
+    partial class Budgethasname
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -245,17 +247,12 @@ namespace JohannasReactProject.Data.Migrations
                     b.Property<decimal>("MaxSpent")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<Guid?>("VariableCostsCategoryId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
                     b.HasIndex("BudgetId");
-
-                    b.HasIndex("UserId");
 
                     b.HasIndex("VariableCostsCategoryId");
 
@@ -529,17 +526,11 @@ namespace JohannasReactProject.Data.Migrations
                         .WithMany("BudgetCategories")
                         .HasForeignKey("BudgetId");
 
-                    b.HasOne("JohannasReactProject.Models.ApplicationUser", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
-
                     b.HasOne("JohannasReactProject.Models.Entities.VariableCostsCategories", "VariableCostsCategory")
                         .WithMany("BudgetCategories")
                         .HasForeignKey("VariableCostsCategoryId");
 
                     b.Navigation("Budget");
-
-                    b.Navigation("User");
 
                     b.Navigation("VariableCostsCategory");
                 });
