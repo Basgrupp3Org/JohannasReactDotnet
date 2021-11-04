@@ -47,13 +47,14 @@ namespace JohannasReactProject.Repositories.Concrete
         {
           var returnList = new List<VariableCostCategoryDTO>();
 
-            
-            var budgetCategories = _context.BudgetCategories.Where(x => userId == x.User.Id).Include("VariableCostsCategories").ToList();
+            var currentBudget = _context.Budgets.Where(b => b.User.Id == userId).OrderByDescending(b => b.StartDate).FirstOrDefault();
+            var budgetCategories = _context.BudgetCategories.Where(x => x.Budget.Id == currentBudget.Id).Include(v => v.VariableCostsCategory).ToList();
             
                 foreach(var item in budgetCategories)
-            {
+                {
                 returnList.Add(new VariableCostCategoryDTO
                 {
+                    Id = item.VariableCostsCategory.Id,
                     Name = item.VariableCostsCategory.Name,
                     Spent = item.VariableCostsCategory.Spent,
                     ToSpend = item.VariableCostsCategory.ToSpend
@@ -69,6 +70,7 @@ namespace JohannasReactProject.Repositories.Concrete
             var budget = _context.Budgets.Where(b => b.User == person).OrderByDescending(b => b.StartDate).FirstOrDefault();
             variableCostsCategories.User = person;
             _context.VariableCostsCategories.Add(variableCostsCategories);
+            budget.Unbudgeted -= variableCostsCategories.ToSpend - variableCostsCategories.Spent;
             var budgetCategory = new BudgetCategory();
             budgetCategory.Budget = budget;
             budgetCategory.User = person;
