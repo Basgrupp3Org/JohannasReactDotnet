@@ -5,7 +5,6 @@ import BudgetData from "./BudgetData";
 
 export default function Budgets(props) {
     const [active, setActive] = useState("");
-    console.log(props.data);
 
     return (
         <>

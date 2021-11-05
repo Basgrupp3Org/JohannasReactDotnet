@@ -7,19 +7,15 @@ import {
     BrowserRouter as Router,
     Switch,
     Route,
-    NavLink,
-    useParams,
-    useRouteMatch,
+    NavLink
 } from "react-router-dom";
 
 export default function HistoryPage() {
-    let { path, url } = useRouteMatch();
     const [budgetData, setBudgetData] = useState([]);
     const [purchaseData, setPurchaseData] = useState([]);
 
-
     useEffect(() => {
-        async function fetchMyAPI() {
+        async function fetchBudgets() {
             const token = await authService.getAccessToken();
             const response = await fetch('api/budget', {
                 headers: !token ? {} : { 'Authorization': `Bearer ${token}` }
@@ -28,9 +24,7 @@ export default function HistoryPage() {
             console.log(data)
             setBudgetData(data[data.length - 1])
         }
-
-        fetchMyAPI()
-
+        fetchBudgets()
     }, []);
 
     useEffect(() => {
@@ -43,9 +37,7 @@ export default function HistoryPage() {
             console.log(data)
             setPurchaseData(data)
         }
-
         fetchPurchases()
-
     }, []);
 
     return (
@@ -68,7 +60,6 @@ export default function HistoryPage() {
                         </ul>
                         <hr />
                     </nav>
-
                     <Switch>
                         <Route exact path="/history">
                             {budgetData ? < Budgets data={budgetData} /> : "Loading..."}

@@ -2,7 +2,6 @@
 
 const Transactions = (props) => {
     const [transaction, setTransaction] = useState([])
-    console.log(props.data[0]);
 
     useEffect(() => {
         if (props.data) {
@@ -12,7 +11,6 @@ const Transactions = (props) => {
 
     return (
         <>
-
             <div className="__transaction-inputs">
                 <form>
                     <label>Datum från:</label>
@@ -24,10 +22,7 @@ const Transactions = (props) => {
                     <button className="__filter-btn">Filtrera</button>
                 </form>
             </div>
-
-
             <input type="text" className="__search-table" placeholder="Sök"></input>
-
             <div className="__table-wrapper">
                 {/* <table className="__transactions-table">
                     <thead>
@@ -47,19 +42,18 @@ const Transactions = (props) => {
                         </tr>
                     </tbody>
                 </table> */}
+
                 <div className="__transaction-headers">
                     <h3>Namn</h3>
                     <h3>Pris</h3>
                 </div>
-
                 {transaction.reverse().slice(0, 5).map((x, i) =>
                     <div key={i} className="__transactions-table">
                         <p>{x.name}</p>
-                        <p>{x.price}kr </p>
+                        <p>{x.price} kr</p>
                     </div>
                 )}
             </div>
-
         </>
     );
 };
