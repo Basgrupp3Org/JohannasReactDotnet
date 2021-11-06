@@ -12,6 +12,7 @@ namespace JohannasReactProject.Models.Entities
         
         public virtual VariableCostsCategories VariableCostsCategory { get; set; }
         public decimal MaxSpent { get; set; }
+        public virtual ApplicationUser User { get; set; }
     }
 
     public class VariableCostsCategories : Entity

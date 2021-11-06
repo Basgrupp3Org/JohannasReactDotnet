@@ -28,7 +28,7 @@ namespace JohannasReactProject.Controllers
             _userId = httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
         }
 
-        public PurchaseController(IPurchaseService service) => _service = service;
+        
         // GET: api/<PurchaseController>
         [HttpGet]
         public IEnumerable<PurchaseDTO> Get()

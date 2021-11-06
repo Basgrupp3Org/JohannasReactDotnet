@@ -17,7 +17,7 @@ export default class App extends Component {
     return (
       <Layout>
             <Route exact path='/' component={Home} />
-            <Route exact path='/Homepage' component={HomePage} />
+         
             
      
             <AuthorizeRoute path='/HomePage' component={HomePage} />

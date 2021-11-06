@@ -51,10 +51,11 @@ namespace JohannasReactProject.Repositories.Concrete
                 list.Add(new BudgetDTO
                 {
                     
-                    StartDate = item.StartDate,
-                    EndDate = item.EndDate,
+                    StartDate = item.StartDate.ToString("yyyy-MM-dd"),
+                    EndDate = item.EndDate.ToString("yyyy-MM-dd"),
                     Income = item.Income,
                     Unbudgeted = item.Unbudgeted,
+                    Name = item.Name
                     //fixedCostCategoryDTO = fixedList
                     
                 });
@@ -67,9 +68,14 @@ namespace JohannasReactProject.Repositories.Concrete
         {
             var person = _context.Users.Where(u => u.Id == userId).FirstOrDefault();
             var fixedCosts = _context.FixedCostsCategories.Where(f => f.User.Id == userId).ToList();
-
+            decimal totalFixedCostSum = 0;
+            foreach(var item in fixedCosts)
+            {
+                totalFixedCostSum += item.Cost;
+            }
             budget.User = person;
             budget.FixedCostsCategories = fixedCosts;
+            budget.Unbudgeted = budget.Income - totalFixedCostSum;
             _context.Budgets.Add(budget);
            await _context.SaveChangesAsync();
         }
