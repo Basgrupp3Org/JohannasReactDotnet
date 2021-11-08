@@ -1,59 +1,154 @@
-﻿import React, { useState, useRef } from "react";
-import "./Accordion.css";
-
-function Accordion(props) {
-    const [setActive, setActiveState] = useState(false);
-
-
-    const content = useRef(null);
-
-    function toggleAccordion() {
-        setActiveState(!setActive);
-
-
-    }
-
-    let activeclassName = ''
-
-    if (setActive === true) {
-        activeclassName = 'accordion--active'
-    }
+﻿import React, {useState} from 'react';
+import { ExpandMore } from '@material-ui/icons';
+import {Accordion,AccordionSummary, AccordionDetails } from '@material-ui/core';
+import { AccordionActions, Button, Divider } from '@material-ui/core';
+import authService from "../api-authorization/AuthorizeService"
+// import DatePicker from "react-datepicker";
+// import "react-datepicker/dist/react-datepicker.css";
 
 
 
-    return (
-        <div className={`accordion__section ${activeclassName}`}>
-            <button className={`accordion `} onClick={toggleAccordion}>
-                <p className="accordion__title">{props.title}</p>
 
 
-            </button>
-
-            <div
-                ref={content}
-
-                className="accordion__content"
+ export function Accordions() {
 
 
-            >
-                <button>Lägg till</button>
+    
+    const [budgetName, setBudgetName] = useState("");
+    const [income, setIncome] = useState(0);
+    const [endDate, setEndDate] = useState("");
+    const [startDate, setStartDate] = useState("");
+    const [expandedPanel, setExpandedPanel] = useState(null);
+  
+    const handleAccordionChange = (panel) => (event, isExpanded) => {
+      console.log({ event, isExpanded });
+      setExpandedPanel(isExpanded ? panel : false);
+    };
+// console.log(budgetName)    
+// console.log(income)
+// console.log(endDate)
 
-
-                <div
-
-                    className="accordion__text"
-
-                    dangerouslySetInnerHTML={{ __html: props.content }}
-
-                />
-
-
-
-            </div>
-        </div >
-
-
-    );
+const handleIncome = (e) => {
+    setIncome(e.target.value)
 }
 
-export default Accordion;
+
+async function PostBudget() {
+    const requestObject = {
+        Income: income,
+        StartDate: startDate,
+        EndDate: endDate,
+        Name: budgetName,
+    }
+    const token = await authService.getAccessToken();
+    await fetch('api/budget', {
+        method: 'POST',
+        headers: !token ? {} : { 'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'},
+        body: JSON.stringify(requestObject)
+    }).then(data => { console.log(data) })
+    .catch((err) => {
+        console.error(err);
+    })
+    
+    
+}
+
+    return (
+      <div className="Accordions">
+                                        {/* Här börjar panel1(Date) */}
+        <Accordion expanded={expandedPanel === 'panel1'} onChange={handleAccordionChange('panel1')} >
+  
+          <AccordionSummary expandIcon={<ExpandMore />}
+          aria-label="Expand"
+          aria-controls="additional-actions1-content"
+          id="additional-actions1-header"
+          >
+              
+          Date: {startDate}  -  {endDate}
+
+          </AccordionSummary>
+  
+          <AccordionDetails>
+          Det som skrev i input
+          </AccordionDetails>
+           
+          <input
+          type="date"
+          value={startDate}
+          onChange={e => setStartDate(e.target.value)}
+          />
+
+          <input
+          type="date"
+          value={endDate}
+          onChange={e => setEndDate(e.target.value)}
+          />
+
+          
+
+      
+          <Divider />
+        <AccordionActions>
+          <Button size="small" onClick={() => alert('cancel')}>Cancel</Button>
+          <Button size="small" color="primary" onClick={() => alert('save')}>Save</Button>
+        </AccordionActions>
+                            
+        </Accordion>
+                                        {/* Här börjar panel2(Income) */}
+        <Accordion expanded={expandedPanel === 'panel2'} onChange={handleAccordionChange('panel2')}  >
+  
+          <AccordionSummary expandIcon={<ExpandMore />}
+           aria-label="Expand"
+           aria-controls="additional-actions2-content"
+           id="additional-actions2-header"
+          >
+              
+              Income: {income}:-
+
+
+          </AccordionSummary>
+           
+          <AccordionDetails>
+
+              det som skrevs i input
+          
+          </AccordionDetails>
+          <input
+          
+              placeholder="Amount"
+              type="text"
+              value= {income}
+              onChange={ e => setIncome(e.target.value)}
+            
+            />
+        </Accordion>
+                                    {/* Här börjar panel3(Unbudgeted) */}
+        <Accordion expanded={expandedPanel === 'panel3'} onChange={handleAccordionChange('panel3')}  >
+  
+          <AccordionSummary expandIcon={<ExpandMore />}>
+            Budget name:         {budgetName}
+          </AccordionSummary>
+  
+          <AccordionDetails>
+          Det som skrev i input
+          </AccordionDetails>
+
+          <input
+          
+              placeholder="Name"
+              type="Text"
+              value= {budgetName}
+              onChange={ e => setBudgetName(e.target.value)}
+           
+              
+            />
+         
+        </Accordion>
+
+  <button onClick={PostBudget}>
+      Save Budget
+      </button>
+      </div>
+    );
+  }

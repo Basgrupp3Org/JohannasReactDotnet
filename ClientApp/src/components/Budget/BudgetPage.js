@@ -1,79 +1,47 @@
-﻿import React from "react";
-import Accordion from './Accordion'
-import './BudgetPage.css'
-import CreateCategoryModal from './CreateCategoryModal';
+﻿
+import React, { useState, useEffect} from "react";
+import authService from "../api-authorization/AuthorizeService"
+import {ControlledAccordions} from "./Accordion";
+import CreateCategoryModal from "./CreateCategoryModal";
 import CreateBudgetModal from './CreateBudgetModal';
+import {Accordions} from './Accordion';
 
 
+export default function BudgetPage() {
+    const [budgetData, setBudgetData] = useState([]);
+    // const [variableCosts, setVariableCosts] = useState([]);
+    // const [fixedCosts, setFixedCosts] = useState([]);
+
+    useEffect(() => {
+       async function fetchMyAPI() {
+           const token = await authService.getAccessToken();
+           const response = await fetch('api/budget', {
+               headers: !token ? {} : { 'Authorization': `Bearer ${token}` }
+           });
+           const data = await response.json();
+           console.log(data)
+           setBudgetData(data)
+       }
+
+       fetchMyAPI()
+
+    }, []);
 
 
-function BudgetPage() {
-    return (
+    
+   
+    return(
         <div>
-            <Accordion
-                title="Datum"
-                content="16-06-2021 - 31-06-2021"
-            />
-
-
-            <Accordion
-                title="Bostad      3000kr/mån"
-                content="3000:- Bostad"
-            />
-
-
-            <Accordion
-                title="Fordon      3000kr/mån"
-                content="1000:-    Volvo" />
-
-            <Accordion
-                title="Rörliga kostnader    8000kr/mån"
-                content="500:-    SF Bio" />
-
-            <Accordion
-                title="Fasta utgifter     1000kr/mån"
-                content="1000:-        CSN-Lån" />
-
-            <Accordion
-                title="Obudgeterat   1000kr/mån"
-                content="1000:-  Cykelaffär" />
-
-            <Accordion
-                title="Inkomst   37000 SEK"
-                content="37000:-   Lön"
-            />
-
-
-            <div className="buttons">
-
-                <CreateCategoryModal />
-
-                <CreateBudgetModal />
-
-
-
-
-            </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
+            <Accordions/>
         </div>
+    )
+    
+    
 
 
 
-    );
+
+       
+
+
 }
-
-
-
-export default BudgetPage;
