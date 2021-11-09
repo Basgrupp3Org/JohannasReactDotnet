@@ -1,0 +1,76 @@
+
+/* .budgetpage__fullpage_div {
+ display:flex;
+ height: 600px;
+ 
+} */
+
+
+.budgetpage__leftside_div {
+ 
+    display:flex;
+    align-items: top;
+    width: 500px;
+    height: 300px;
+    align-items: flex-end;
+    
+}
+
+.budgetpage__bottomtopleft_div {
+   display:flex;
+   align-items: flex-end;
+   justify-content: center;
+   height: 300px;
+   gap: 300px;
+   
+}
+
+.vertical_line_div{
+   
+}
+
+
+
+.btn1 {
+    width: 150px;
+    height: 70px;
+    border-radius: -10px;
+    background: linear-gradient(#fff, #2a9d8f);
+    font-size: 20px;
+    color: black;
+    gap: 50px;
+   
+}
+
+
+.btn2 {
+    
+    width: 150px;
+    height: 70px;
+    border-radius: -10px;
+    background: linear-gradient(#fff, #2a9d8f);
+    font-size: 20px;
+    color: black;
+    
+}
+
+.SubmitBudget {
+
+    width: 150px;
+    height: 70px;
+    border-radius: -10px;
+    background: linear-gradient(#fff, #2a9d8f);
+    font-size: 20px;
+    color: black;
+    justify-self: start;
+    
+}
+
+
+.AccordionSummary {
+    background: linear-gradient(#fff, #2a9d8f);
+}
+
+
+
+

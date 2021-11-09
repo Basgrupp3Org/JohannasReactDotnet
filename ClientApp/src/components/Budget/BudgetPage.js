@@ -3,8 +3,9 @@ import React, { useState, useEffect} from "react";
 import authService from "../api-authorization/AuthorizeService"
 import {ControlledAccordions} from "./Accordion";
 import CreateCategoryModal from "./CreateCategoryModal";
-import CreateBudgetModal from './CreateBudgetModal';
 import {Accordions} from './Accordion';
+import CreateVariableCostModal from "./CreateVariableCostModal";
+import './BudgetPage.css'
 
 
 export default function BudgetPage() {
@@ -31,8 +32,21 @@ export default function BudgetPage() {
     
    
     return(
-        <div>
-            <Accordions/>
+        
+        <div className="budgetpage__fullpage_div">
+            <div className="budgetpage__leftside_div">
+            <Accordions/> 
+            </div>
+            
+            <div className="budgetpage__bottomtopleft_div">
+            <CreateCategoryModal />
+            <CreateVariableCostModal />
+            </div>
+            
+
+        
+
+            
         </div>
     )
     

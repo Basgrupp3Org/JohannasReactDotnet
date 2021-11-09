@@ -3,6 +3,7 @@ import { ExpandMore } from '@material-ui/icons';
 import {Accordion,AccordionSummary, AccordionDetails } from '@material-ui/core';
 import { AccordionActions, Button, Divider } from '@material-ui/core';
 import authService from "../api-authorization/AuthorizeService"
+
 // import DatePicker from "react-datepicker";
 // import "react-datepicker/dist/react-datepicker.css";
 
@@ -59,7 +60,7 @@ async function PostBudget() {
                                         {/* Här börjar panel1(Date) */}
         <Accordion expanded={expandedPanel === 'panel1'} onChange={handleAccordionChange('panel1')} >
   
-          <AccordionSummary expandIcon={<ExpandMore />}
+          <AccordionSummary className="AccordionSummary" expandIcon={<ExpandMore />}
           aria-label="Expand"
           aria-controls="additional-actions1-content"
           id="additional-actions1-header"
@@ -69,9 +70,9 @@ async function PostBudget() {
 
           </AccordionSummary>
   
-          <AccordionDetails>
+          {/* <AccordionDetails>
           Det som skrev i input
-          </AccordionDetails>
+          </AccordionDetails> */}
            
           <input
           type="date"
@@ -88,17 +89,13 @@ async function PostBudget() {
           
 
       
-          <Divider />
-        <AccordionActions>
-          <Button size="small" onClick={() => alert('cancel')}>Cancel</Button>
-          <Button size="small" color="primary" onClick={() => alert('save')}>Save</Button>
-        </AccordionActions>
+       
                             
         </Accordion>
                                         {/* Här börjar panel2(Income) */}
         <Accordion expanded={expandedPanel === 'panel2'} onChange={handleAccordionChange('panel2')}  >
   
-          <AccordionSummary expandIcon={<ExpandMore />}
+          <AccordionSummary className="AccordionSummary" expandIcon={<ExpandMore />}
            aria-label="Expand"
            aria-controls="additional-actions2-content"
            id="additional-actions2-header"
@@ -109,11 +106,11 @@ async function PostBudget() {
 
           </AccordionSummary>
            
-          <AccordionDetails>
+          {/* <AccordionDetails>
 
               det som skrevs i input
           
-          </AccordionDetails>
+          </AccordionDetails> */}
           <input
           
               placeholder="Amount"
@@ -126,15 +123,15 @@ async function PostBudget() {
                                     {/* Här börjar panel3(Unbudgeted) */}
         <Accordion expanded={expandedPanel === 'panel3'} onChange={handleAccordionChange('panel3')}  >
   
-          <AccordionSummary expandIcon={<ExpandMore />}>
+          <AccordionSummary className="AccordionSummary" expandIcon={<ExpandMore />}>
             Budget name:         {budgetName}
           </AccordionSummary>
   
-          <AccordionDetails>
+          {/* <AccordionDetails>
           Det som skrev i input
-          </AccordionDetails>
+          </AccordionDetails> */}
 
-          <input
+          <input className="input"
           
               placeholder="Name"
               type="Text"
@@ -146,7 +143,7 @@ async function PostBudget() {
          
         </Accordion>
 
-  <button onClick={PostBudget}>
+  <button className="SubmitBudget" onClick={PostBudget}>
       Save Budget
       </button>
       </div>

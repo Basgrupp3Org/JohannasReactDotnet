@@ -2,6 +2,7 @@
 using JohannasReactProject.Models.Entities;
 using JohannasReactProject.Models.Web;
 using JohannasReactProject.Repositories.Abstract;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -41,7 +42,7 @@ namespace JohannasReactProject.Repositories.Concrete
 
         public async Task Post(FixedCostsCategories fixedCostsCategory, string userId)
         {
-            var budget = _context.Budgets.Where(b => b.User.Id == userId).OrderByDescending(b => b.StartDate).FirstOrDefault();
+            var budget = _context.Budgets.Where(b => b.User.Id == userId).OrderByDescending(b => b.StartDate).Include(f => f.FixedCostsCategories).FirstOrDefault();
             budget.FixedCostsCategories.Add(fixedCostsCategory);
             budget.Unbudgeted -= fixedCostsCategory.Cost;
             var person = _context.Users.Where(u => u.Id == userId).FirstOrDefault();
