@@ -66,7 +66,7 @@ export class NavMenu extends Component {
                 </NavItem>
                 <NavItem>
                   <NavLink tag={Link} className="text-white" to="/BudgetPage">
-                    Budget data
+                    Budget
                   </NavLink>
                 </NavItem>
                 <LoginMenu></LoginMenu>

@@ -1,0 +1,107 @@
+  
+ .budgetpage__fullpage_div {
+ display:flex;
+ flex-direction: column;
+ 
+ 
+} 
+
+
+.budgetpage__leftside_div {
+ 
+    display:flex;
+    align-items: top;
+    height: 300px;
+    justify-content: space-between;
+    margin-top: 50px;
+    
+}
+
+.budgetpage__bottomtopleft_div {
+   display:flex;
+   align-items: flex-end;
+   justify-content: center;
+   height: 100px;
+   gap: 50px;
+  
+   
+}
+
+.vertical_line_div{
+   
+}
+
+
+
+.btn1 {
+    width: 150px;
+    height: 70px;
+    border-radius: -10px;
+    background: linear-gradient(#fff, #2a9d8f);
+    font-size: 20px;
+    color: black;
+    /* gap: 20px; */
+   
+}
+
+
+.btn2 {
+    
+    width: 150px;
+    height: 70px;
+    border-radius: -10px;
+    background: linear-gradient(#fff, #2a9d8f);
+    font-size: 20px;
+    color: black;
+    
+}
+
+.SubmitBudget {
+
+    width: 150px;
+    height: 70px;
+    border-radius: -10px;
+    background: linear-gradient(#fff, #2a9d8f);
+    font-size: 20px;
+    color: black;
+    justify-self: start;
+    
+}
+
+
+.AccordionSummary {
+    background: linear-gradient(#fff, #2a9d8f);
+}
+
+
+.variable-category {
+    color: #fff;
+    
+    
+}
+.variable-categories {
+    display:flex;
+    text-align: center;
+    background: linear-gradient(#fff, #2a9d8f);
+    width: 76.8%;
+    padding:  5px 5px 5px;
+    margin: 5px;
+    justify-content: space-between;
+    
+}
+
+.showVariableCostCategory {
+    display:flex;
+    flex-direction: column;
+    width: 50%;
+    align-items: center;
+    
+}
+
+
+.Modals {
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+}
+

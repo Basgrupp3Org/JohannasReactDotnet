@@ -1,9 +1,10 @@
-﻿import "./BudgetPage";
+import "./BudgetPage";
 import React, { useState, useEffect, useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Modal from "@material-ui/core/Modal";
 import { Input } from "@material-ui/core";
 import authService from "../api-authorization/AuthorizeService"
+
 
 
 function getModalStyle() {
@@ -28,17 +29,14 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-function CreateCategoryModal() {
+function CreateVariableCostModal() {
     const classes = useStyles();
     const [modalStyle] = React.useState(getModalStyle);
     const [summary, setSummary] = useState("");
     const [open, setOpen] = useState(false);
     const [name, setName] = useState("");
-    const [cost, setCost] = useState("");
-
-
-
-
+    const [toSpend, setToSpend] = useState("");
+    
 
 
 
@@ -46,7 +44,9 @@ function CreateCategoryModal() {
     const ResetForm = (data) => {
 
         setName('')
-        setCost('')
+        setToSpend('')
+        
+        
 
         setOpen(false)
         window.alert('Your Category has succesfully been uploaded!')
@@ -54,7 +54,8 @@ function CreateCategoryModal() {
 
     const handleBudgetChange = (e) => {
        
-       setCost(e.target.value)
+       setToSpend(e.target.value)
+       
 
        
     }
@@ -62,11 +63,13 @@ function CreateCategoryModal() {
     async function PostFixedCategory() {
         const requestObject = { 
             Name: name,
-            Cost : cost,
+            ToSpend: toSpend,
+           
+            
         }
 
         const token = await authService.getAccessToken();
-        await fetch('api/fixedcostcategory', {
+        await fetch('api/variablecostcategory', {
             method: 'POST',
             headers: !token ? {} : {'Authorization': `Bearer ${token}`,
         'Content-Type': 'application/json'},
@@ -93,7 +96,7 @@ function CreateCategoryModal() {
 
     return (
         <div className="rpm">
-            <button className="btn2" onClick={() => setOpen(true)}>Lägg till en fast Kategori</button>
+            <button className="btn1" onClick={() => setOpen(true)}>Lägg till en rörlig Kategori</button>
 
             <Modal open={open} onClose={() => setOpen(false)}>
                 <div style={modalStyle} className={classes.paper}>
@@ -115,12 +118,11 @@ function CreateCategoryModal() {
                            <input
                             type="number"
                              className="modalinputs"
-                            placeholder="Category Cost"
-                            value={cost}
-                            onChange={e => setCost(e.target.value)}
+                            placeholder="To spend"
+                            value={toSpend}
+                            onChange={e => setToSpend(e.target.value)}
                             required
                         ></input>
-
 
                         <button
                             variant="contained"
@@ -137,4 +139,4 @@ function CreateCategoryModal() {
 }
 
 
-export default CreateCategoryModal;
+export default CreateVariableCostModal;
