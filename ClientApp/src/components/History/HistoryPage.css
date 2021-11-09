@@ -104,7 +104,7 @@ form {
 }
 
 .__history-table {
-    grid-row: 3 / 6;
+    grid-row: 2 / 6;
     grid-column: 2 / 8;
     text-decoration: none;
     /* margin:50px; */
@@ -133,11 +133,18 @@ form {
 /*---------------Transactions------------------- */
 .__transaction-inputs {
     grid-row: 2 / 3;
-    grid-column: 1 / 8;
+    grid-column: 2 / 7;
     padding-top: 0;
     padding-bottom: 0;
     text-align: center;
     display: inline-block;
+}
+
+.__transaction-form {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    align-items: baseline;
 }
 
 .__transaction-headers {
@@ -170,9 +177,8 @@ form {
 }
 
 .__filter-input {
-    margin-left: 10px;
-    margin-right: 10px;
     padding: 10px;
+    width: 25%;
     background-color: #abb2bf4f;
     color: #ABB2BF;
 }
@@ -209,7 +215,7 @@ form {
     width: inherit;
     height: 25%;
     grid-row: 3 / 5;
-    grid-column: 3 / 6;
+    grid-column: 2 / 7;
     background-color: #abb2bf4f;
     color: #fff;
 }

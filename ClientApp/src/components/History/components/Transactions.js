@@ -12,7 +12,7 @@ const Transactions = (props) => {
     return (
         <>
             <div className="__transaction-inputs">
-                <form>
+                <form className="__transaction-form">
                     <label>Datum från:</label>
                     <input type="date" className="__filter-input" />
                     <label>Datum till:</label>
