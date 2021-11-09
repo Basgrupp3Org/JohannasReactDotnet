@@ -61,7 +61,7 @@ export class NavMenu extends Component {
                 </NavItem>
                 <NavItem>
                   <NavLink tag={Link} className="text-white" to="/HistoryPage">
-                    History data
+                    History
                   </NavLink>
                 </NavItem>
                 <NavItem>
