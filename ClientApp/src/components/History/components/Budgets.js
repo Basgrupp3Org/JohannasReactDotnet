@@ -1,15 +1,75 @@
-﻿import React, { useState } from "react";
+﻿import React, { useState, useEffect } from "react";
 import HistorySidebar from "./HistorySidebar";
 import BudgetData from "./BudgetData";
+import Budget from "../../Home/Budget";
+import authService from "../../api-authorization/AuthorizeService";
 
 
 export default function Budgets(props) {
-    const [active, setActive] = useState("");
+    const [activeBudget, setActiveBudget] = useState([]);
+    const [budgets, setBudgets] = useState([]);
+    const [savingData, setSavingData] = useState([]);
+    console.log(props);
+
+    useEffect(() => {
+        async function fetchBudgets() {
+            const token = await authService.getAccessToken();
+            const response = await fetch('api/budget', {
+                headers: !token ? {} : { 'Authorization': `Bearer ${token}` }
+            });
+            const data = await response.json();
+            console.log(data)
+            setBudgets(data)
+        }
+        fetchBudgets()
+    }, []);
+
+    useEffect(() => {
+        async function fetchSavingGoals() {
+            const token = await authService.getAccessToken();
+            const response = await fetch('api/savinggoal', {
+                headers: !token ? {} : { 'Authorization': `Bearer ${token}` }
+            });
+            const data = await response.json()
+            console.log(data)
+            setSavingData(data)
+        }
+
+        fetchSavingGoals()
+
+    }, []);
+
+    useEffect(() => {
+        setActiveBudget(props.data)
+    }, [])
+
+    const changeBudget = (x) => {
+        // for (let i = 0; i < budgets.length; i++) {
+        //     if (i === x) {
+        //         setActiveBudget(budgets[i])
+        //         setSavingData(props.savingData)
+        //         console.log(budgets[i]);
+        //     }
+
+        // }
+        setActiveBudget(budgets[x])
+    }
 
     return (
         <>
             <div className="__history-sidebar">
-                <ul>
+                {budgets.length ? budgets.map((x, i) => {
+                    return <div key={i}>
+                        <ul>
+                            <li onClick={() => changeBudget(i)} className="__budget-btn">
+                                {x.name}
+                            </li>
+                        </ul>
+
+                    </div>
+                }) : null}
+
+                {/* <ul>
                     <li>
                         <button className="__budget-btn" onClick={() => active ? setActive("") : setActive("FirstCard")}>2021</button>
                         {active === "FirstCard" && <HistorySidebar data={BudgetData} cardIndex={0} />}
@@ -22,66 +82,12 @@ export default function Budgets(props) {
                         <button className="__budget-btn" onClick={() => active ? setActive("") : setActive("ThirdCard")}>2019</button>
                         {active === "ThirdCard" && <HistorySidebar data={BudgetData} cardIndex={2} />}
                     </li>
-                </ul>
+                </ul> */}
 
             </div>
             <div className="__line2"></div>
-            <div className="__history-content">
-                <h2>{props.data.name}</h2>
-                <div className="from-to-date">
-                    <p>{props.data.startDate}</p>
-                    <p>-</p>
-                    <p>{props.data.endDate}</p>
-                </div>
-            </div>
             <div className="__history-table">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Inkomster</th>
-                            <th>Fasta Kostnader</th>
-                            <th>Sparmål</th>
-                            <th>Rörliga Kostnader</th>
-                            <th>Totalt</th>
-                            <th>Obudgeterat</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>36000</td>
-                            <td>Skatt - 10800</td>
-                            <td>Resa - 1000</td>
-                            <td>Mat - 5000</td>
-                            <td>17800</td>
-                            <td>9 200 SEK</td>
-                        </tr>
-
-                        <tr>
-                            <td></td>
-                            <td>Hyra - 3000</td>
-                            <td></td>
-                            <td>Nöje - 3000</td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td>Lån - 1000</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td>Fordon - 3000</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                    </tbody>
-                </table>
+                <Budget data={activeBudget} savingData={savingData} />
             </div>
         </>
     );

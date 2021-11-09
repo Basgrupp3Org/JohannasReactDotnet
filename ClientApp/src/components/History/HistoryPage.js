@@ -13,6 +13,7 @@ import {
 export default function HistoryPage() {
     const [budgetData, setBudgetData] = useState([]);
     const [purchaseData, setPurchaseData] = useState([]);
+    const [savingData, setSavingData] = useState([]);
 
     useEffect(() => {
         async function fetchBudgets() {
@@ -40,6 +41,21 @@ export default function HistoryPage() {
         fetchPurchases()
     }, []);
 
+    useEffect(() => {
+        async function fetchSavingGoals() {
+            const token = await authService.getAccessToken();
+            const response = await fetch('api/savinggoal', {
+                headers: !token ? {} : { 'Authorization': `Bearer ${token}` }
+            });
+            const data = await response.json()
+            console.log(data)
+            setSavingData(data)
+        }
+
+        fetchSavingGoals()
+
+    }, []);
+
     return (
         <>
             <Router>
@@ -62,7 +78,7 @@ export default function HistoryPage() {
                     </nav>
                     <Switch>
                         <Route exact path="/history">
-                            {budgetData ? < Budgets data={budgetData} /> : "Loading..."}
+                            {budgetData ? < Budgets data={budgetData} savingData={savingData} /> : "Loading..."}
                         </Route>
                         <Route exact path="/transactions">
                             {purchaseData ? <Transactions data={purchaseData} /> : "Loading..."}
