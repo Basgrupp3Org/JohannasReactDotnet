@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
 
 function CreateVariableCostModal() {
     const classes = useStyles();
-    const [modalStyle] = React.useState(getModalStyle);
+    const [modalStyle] = useState(getModalStyle);
     const [summary, setSummary] = useState("");
     const [open, setOpen] = useState(false);
     const [name, setName] = useState("");
@@ -41,7 +41,7 @@ function CreateVariableCostModal() {
 
 
     // reset fields and close modal 
-    const ResetForm = (data) => {
+    const ResetVariableCostModal = (data) => {
 
         setName('')
         setToSpend('')
@@ -49,7 +49,7 @@ function CreateVariableCostModal() {
         
 
         setOpen(false)
-        window.alert('Your Category has succesfully been uploaded!')
+        window.alert('Your Category has succesfully been uploaded!') 
     }
 
     const handleBudgetChange = (e) => {
@@ -75,6 +75,7 @@ function CreateVariableCostModal() {
         'Content-Type': 'application/json'},
         body: JSON.stringify(requestObject)
         }).then(data => {console.log(data) })
+        .then(ResetVariableCostModal())
         .catch((err) => {
             console.error(err);
         })
