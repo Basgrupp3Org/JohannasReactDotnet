@@ -63,19 +63,26 @@ async function PostBudget() {
         'Content-Type': 'application/json'},
         body: JSON.stringify(requestObject)
     }).then(data => { console.log(data) })
+    .then(ResetAccordion())
     .catch((err) => {
         console.error(err);
     })
     
 }
-
+const ResetAccordion = (data) => {
+  setStartDate("")
+  setEndDate("")
+  setBudgetName("")
+  setIncome("")
+  window.alert('Your budget has succesfully been uploaded!')
+}
 
 const showVariableCategories = () => {
   return (
    variableCategories.length ? variableCategories.map((x,i) => {
       return <div className="variable-categories" key={i}>
     
-         Name: {x.name}
+         Category: {x.name}
          
          
          <button className="addToBudgetbtn">Add to budget</button>
@@ -108,6 +115,7 @@ const showVariableCategories = () => {
           type="date"
           value={startDate}
           onChange={e => setStartDate(e.target.value)}
+          required
           />
 
           <input
@@ -141,6 +149,7 @@ const showVariableCategories = () => {
               type="text"
               value= {income}
               onChange={ e => setIncome(e.target.value)}
+              required
             
             />
         </Accordion>

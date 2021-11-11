@@ -43,7 +43,7 @@ function CreateCategoryModal() {
 
 
     // reset fields and close modal 
-    const ResetForm = (data) => {
+    const ResetFixedCategory = (data) => {
 
         setName('')
         setCost('')
@@ -72,6 +72,7 @@ function CreateCategoryModal() {
         'Content-Type': 'application/json'},
         body: JSON.stringify(requestObject)
         }).then(data => {console.log(data) })
+        .then(ResetFixedCategory())
         .catch((err) => {
             console.error(err);
         })
