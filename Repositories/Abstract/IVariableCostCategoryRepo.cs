@@ -12,7 +12,7 @@ namespace JohannasReactProject.Repositories.Abstract
     {
         Task Post(VariableCostsCategories variableCostsCategories, string userId);
         Task Edit(EditVariableCostCategoryDTO editVariableCostCategoryDTO);
-        IEnumerable<VariableCostCategoryDTO> Get(string userId);
+        IEnumerable<VariableCostsCategories> Get(ApplicationUser user);
         IEnumerable<VariableCostCategoryDTO> GetForCurrentBudget(string userId);
     }
 }
