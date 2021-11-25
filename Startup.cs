@@ -52,6 +52,7 @@ namespace JohannasReactProject
             services.AddTransient<ISavingGoalService, SavingGoalService>();
             services.AddTransient<ISavingGoalRepo, SavingGoalRepo>();
             services.AddTransient<IUserRepo, UserRepo>();
+            services.AddTransient<IBudgetCategoryRepo, BudgetCategoryRepo>();
 
 
 

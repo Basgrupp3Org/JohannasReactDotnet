@@ -27,40 +27,15 @@ namespace JohannasReactProject.Repositories.Concrete
             await _context.SaveChangesAsync();
         }
 
-        public IEnumerable<VariableCostCategoryDTO> Get(string userId)
+        public IEnumerable<VariableCostsCategories> Get(ApplicationUser user)
         {
-            var returnList = new List<VariableCostCategoryDTO>();
-            var variableCostCateogry = _context.VariableCostsCategories.Where(x => x.User.Id == userId).ToList();
-           foreach(var item in variableCostCateogry)
-           {
-                returnList.Add(new VariableCostCategoryDTO
-                {
-                    Name = item.Name,
-                    Spent = item.Spent,
-                    ToSpend = item.ToSpend,
-                });
-           }
-            return returnList;
+            var variableCostsCategories = new List<VariableCostsCategories>();
+            return variableCostsCategories;
         }
 
-        public IEnumerable<VariableCostCategoryDTO> GetForCurrentBudget(string userId)
+        public IEnumerable<VariableCostsCategories> GetForCurrentBudget(ApplicationUser user)
         {
-          var returnList = new List<VariableCostCategoryDTO>();
-
-            var currentBudget = _context.Budgets.Where(b => b.User.Id == userId).OrderByDescending(b => b.StartDate).FirstOrDefault();
-            var budgetCategories = _context.BudgetCategories.Where(x => x.Budget.Id == currentBudget.Id).Include(v => v.VariableCostsCategory).ToList();
-            
-                foreach(var item in budgetCategories)
-                {
-                returnList.Add(new VariableCostCategoryDTO
-                {
-                    Id = item.VariableCostsCategory.Id,
-                    Name = item.VariableCostsCategory.Name,
-                    Spent = item.VariableCostsCategory.Spent,
-                    ToSpend = item.VariableCostsCategory.ToSpend
-                });
-            }
-
+            var returnList = new List<VariableCostsCategories>();
             return returnList;
         }
 
