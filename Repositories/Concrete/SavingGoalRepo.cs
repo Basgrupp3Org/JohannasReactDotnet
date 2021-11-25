@@ -13,13 +13,8 @@ namespace JohannasReactProject.Repositories.Concrete
     public class SavingGoalRepo : ISavingGoalRepo
     {
         private readonly ApplicationDbContext _context;
-        private readonly IUserRepo _userRepo;
-        public SavingGoalRepo(ApplicationDbContext context, IUserRepo userRepo)
-        {
-            _context = context;
-            _userRepo = userRepo;
-
-        }
+        public SavingGoalRepo(ApplicationDbContext context) => _context = context;
+        
         public async Task Edit(EditSavingGoalDTO editSavingGoalDTO)
         {
             var foundSavingGoal = _context.SavingGoals.Where(x => x.Id == editSavingGoalDTO.Id).FirstOrDefault();

@@ -46,7 +46,8 @@ namespace JohannasReactProject.Services.Concrete
 
         public async Task Post(SavingGoal savingGoal, string userId)
         {
-            
+            var person = _userRepo.GetUser(userId);
+            savingGoal.User = person;
             await _savingGoalRepo.Post(savingGoal);
         }
     }
