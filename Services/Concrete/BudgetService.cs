@@ -13,7 +13,15 @@ namespace JohannasReactProject.Services.Concrete
     public class BudgetService : IBudgetService
     {
         private readonly IBudgetRepo _budgetRepo;
-        public BudgetService(IBudgetRepo budgetRepo) => _budgetRepo = budgetRepo;
+        private readonly IUserRepo _userRepo;
+        private readonly IFixedCostCategoryRepo _fixedCostRepo;
+
+        public BudgetService(IBudgetRepo budgetRepo, IUserRepo userRepo, IFixedCostCategoryRepo fixedCostCategoryRepo)
+        {
+            _budgetRepo = budgetRepo;
+            _userRepo = userRepo;
+            _fixedCostRepo = fixedCostCategoryRepo;
+        }
         public async Task Edit(EditBudgetDTO budget)
         {
             await _budgetRepo.Edit(budget);
@@ -21,12 +29,42 @@ namespace JohannasReactProject.Services.Concrete
 
         public IEnumerable<BudgetDTO> Get(string userId)
         {
-            return _budgetRepo.Get(userId);
+            var list = new List<BudgetDTO>();
+            var user = _userRepo.GetUser(userId);
+            var budgets = _budgetRepo.Get(user);
+            foreach (var item in budgets)
+            {
+                list.Add(new BudgetDTO
+                {
+                    StartDate = item.StartDate.ToString("yyyy-mm-dd"),
+                    EndDate = item.EndDate.ToString("yyyy-mm-dd"),
+                    Income = item.Income,
+                    Unbudgeted = item.Unbudgeted,
+                    Name = item.Name
+                });
+            }
+            return list;
+        }
+
+        public Budget GetCurrentBudget(string userId)
+        {
+            var user = _userRepo.GetUser(userId);
+           return _budgetRepo.GetCurrentBudget(user);
         }
 
         public async Task Post(Budget budget, string userId)
         {
-           await _budgetRepo.Post(budget, userId);
+            var person = _userRepo.GetUser(userId);
+            var fixedCosts = _fixedCostRepo.Get(person).ToList();
+            decimal totalFixedCostSum = 0;
+            foreach (var item in fixedCosts)
+            {
+                totalFixedCostSum += item.Cost;
+            }
+            budget.User = person;
+            budget.FixedCostsCategories = fixedCosts;
+            budget.Unbudgeted = budget.Income - totalFixedCostSum;
+            await _budgetRepo.Post(budget);
         }
     }
 }
