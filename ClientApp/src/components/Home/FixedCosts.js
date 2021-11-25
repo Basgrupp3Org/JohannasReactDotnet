@@ -1,23 +1,33 @@
 ﻿import React, { useState, useEffect } from 'react'
+import authService from '../api-authorization/AuthorizeService'
 import './HomePage.css'
 
 export default function FixedCosts(props) {
 
     const [total, setTotal] = useState();
-    const [total1, setTotal1] = useState();
+    const [fixedCosts, setFixedCosts] = useState([])
 
+    useEffect  (() => {
+        async function fetchFixedCosts() {
+            const token = await authService.getAccessToken();
+            const response = await fetch('api/fixedcostcategory', {
+                headers: !token ? {} : { 'Authorization': `Bearer ${token}` }
+            });
+            const data = await response.json()
+            console.log(data)
+            setFixedCosts(data)
+        }
 
+        fetchFixedCosts()
+
+    }, [])
     useEffect(() => {
-        if (props.data.fasta) {
+        if (fixedCosts) {
             let localTotal = 0;
-            console.log(props.data.fasta)
-            props.data.fasta.forEach((element, i) => localTotal += (element.summa));
-            setTotal1(localTotal);
-            localTotal += props.data.bostad;
-            localTotal += props.data.fordon;
+           fixedCosts.forEach((element, i) => localTotal += (element.cost));
             setTotal(localTotal);
         }
-    }, [props.data.fasta])
+    }, [fixedCosts])
 
 
 
@@ -28,12 +38,13 @@ export default function FixedCosts(props) {
                 <label >Fasta Utgifter</label>
             </div>
             <div className="fixedcosts__content">
-
-                <label className="fixedcosts__labels">Total: {total}</label>
-                <label className="fixedcosts__labels">Bostad: {props.data.bostad}</label>
-                <label className="fixedcosts__labels">Fordon: {props.data.fordon}</label>
-                <label className="fixedcosts__labels">Övrigt: {total1}</label>
-
+                <label className="fixedcosts__labels">Total: {total} kr</label>
+                 {fixedCosts.length ? fixedCosts.map((x, i) => {
+                     return <div key={i}>
+                    <label className="fixedcosts__labels">{x.name}: {x.cost} kr</label>
+                  
+                </div>
+                 }) : null}
             </div>
         </div>
     )

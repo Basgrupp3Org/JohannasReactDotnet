@@ -34,32 +34,18 @@ namespace JohannasReactProject.Repositories.Concrete
             var fixedList = new List<FixedCostCategoryDTO>();
 
             var budget = _context.Budgets.Where(b => b.User.Id == userId).ToList();
-            
 
             foreach (var item in budget)
             {
-                //FÖR ATT HÄMTA BUDGET OCH EN LISTA AV FIXEDCOSTCATEGORIES
-
-                //foreach(var fixedCost in item.FixedCostsCategories)
-                //{
-                //    fixedList.Add(new FixedCostCategoryDTO
-                //    {
-                //        Name = fixedCost.Name,
-                //        Cost = fixedCost.Cost
-                //    });
-                //}
                 list.Add(new BudgetDTO
                 {
-                    
-                    StartDate = item.StartDate,
-                    EndDate = item.EndDate,
+                    StartDate = item.StartDate.ToString("yyyy-MM-dd"),
+                    EndDate = item.EndDate.ToString("yyyy-MM-dd"),
                     Income = item.Income,
                     Unbudgeted = item.Unbudgeted,
-                    //fixedCostCategoryDTO = fixedList
-                    
+                    Name = item.Name
                 });
             }
-           
             return list;
         }
 
@@ -67,9 +53,14 @@ namespace JohannasReactProject.Repositories.Concrete
         {
             var person = _context.Users.Where(u => u.Id == userId).FirstOrDefault();
             var fixedCosts = _context.FixedCostsCategories.Where(f => f.User.Id == userId).ToList();
-
+            decimal totalFixedCostSum = 0;
+            foreach(var item in fixedCosts)
+            {
+                totalFixedCostSum += item.Cost;
+            }
             budget.User = person;
             budget.FixedCostsCategories = fixedCosts;
+            budget.Unbudgeted = budget.Income - totalFixedCostSum;
             _context.Budgets.Add(budget);
            await _context.SaveChangesAsync();
         }
