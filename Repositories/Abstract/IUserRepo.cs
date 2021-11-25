@@ -1,11 +1,13 @@
-﻿using System;
+﻿using JohannasReactProject.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace JohannasReactProject.Repositories.Abstract
 {
-    interface IUserRepo
+    public interface IUserRepo
     {
+        ApplicationUser GetUser(string userId);
     }
 }
