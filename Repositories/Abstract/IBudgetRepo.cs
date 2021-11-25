@@ -10,8 +10,9 @@ namespace JohannasReactProject.Repositories.Abstract
 {
     public interface IBudgetRepo
     {
-        Task Post(Budget budget, string userId);
+        Task Post(Budget budget);
         Task Edit(EditBudgetDTO budget);
-        IEnumerable<BudgetDTO> Get(string userId);
+        IEnumerable<Budget> Get(ApplicationUser user);
+        Budget GetCurrentBudget(ApplicationUser user);
     }
 }
