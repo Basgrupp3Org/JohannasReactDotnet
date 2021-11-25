@@ -1,4 +1,5 @@
 ﻿using JohannasReactProject.Data;
+using JohannasReactProject.Models;
 using JohannasReactProject.Models.Entities;
 using JohannasReactProject.Models.Web;
 using JohannasReactProject.Repositories.Abstract;
@@ -25,18 +26,18 @@ namespace JohannasReactProject.Repositories.Concrete
             await _context.SaveChangesAsync();
         }
 
-        public IEnumerable<FixedCostCategoryDTO> Get(string userId)
+        public IEnumerable<FixedCostsCategories> Get(ApplicationUser user)
         {
-            var returnList = new List<FixedCostCategoryDTO>();
-            var fixedCostCateogry = _context.FixedCostsCategories.Where(x => x.User.Id == userId).ToList();
-            foreach (var item in fixedCostCateogry)
-            {
-                returnList.Add(new FixedCostCategoryDTO
-                {
-                    Name = item.Name,
-                    Cost = item.Cost
-                });
-            }
+            //var returnList = new List<FixedCostCategoryDTO>();
+            var returnList = _context.FixedCostsCategories.Where(x => x.User == user).ToList();
+            //foreach (var item in fixedCostCateogry)
+            //{
+            //    returnList.Add(new FixedCostCategoryDTO
+            //    {
+            //        Name = item.Name,
+            //        Cost = item.Cost
+            //    });
+            //}
             return returnList;
         }
 
