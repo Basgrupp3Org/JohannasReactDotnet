@@ -1,4 +1,5 @@
-﻿using JohannasReactProject.Models.Entities;
+﻿using JohannasReactProject.Models;
+using JohannasReactProject.Models.Entities;
 using JohannasReactProject.Models.Web;
 using System;
 using System.Collections.Generic;
@@ -9,8 +10,8 @@ namespace JohannasReactProject.Repositories.Abstract
 {
     public interface ISavingGoalRepo
     {
-        Task Post(SavingGoal savingGoal, string userId);
+        Task Post(SavingGoal savingGoal);
         Task Edit(EditSavingGoalDTO editSavingGoalDTO);
-        IEnumerable<SavingGoalDTO> Get(string userId);
+        IEnumerable<SavingGoal> Get(ApplicationUser userId);
     }
 }
