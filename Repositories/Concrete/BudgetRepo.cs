@@ -16,27 +16,21 @@ namespace JohannasReactProject.Repositories.Concrete
         private readonly ApplicationDbContext _context;
 
         public BudgetRepo(ApplicationDbContext context) => _context = context;
-        public async Task Edit(EditBudgetDTO budget)
+        public async Task Edit(Budget budget)
         {
             var foundBudget = _context.Budgets.Where(x => x.Id == budget.Id).FirstOrDefault();
-           
-                foundBudget.Income = budget.Income;
-                foundBudget.StartDate = budget.StartDate;
-                foundBudget.EndDate = budget.EndDate;
-
+            foundBudget = budget;
             await _context.SaveChangesAsync();
-            
         }
 
-        public IEnumerable<Budget> Get(ApplicationUser user)
+        public ICollection<Budget> Get(ApplicationUser user)
         {
-            var budgets = _context.Budgets.Where(b => b.User == user).ToList();
-            return budgets;
+            return _context.Budgets.Where(b => b.User == user).ToList();
         }
 
         public Budget GetCurrentBudget(ApplicationUser user)
         {
-            return _context.Budgets.Where(b => b.User == user).OrderByDescending(b => b.StartDate).FirstOrDefault();
+            return _context.Budgets.Where(b => b.User == user).OrderByDescending(b => b.StartDate).Include(f => f.FixedCostsCategories).FirstOrDefault();
         }
 
         public async Task Post(Budget budget)

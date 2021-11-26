@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace JohannasReactProject.Repositories.Abstract
 {
-    interface IBudgetCategoryRepo
+    public interface IBudgetCategoryRepo
     {
     }
 }

@@ -22,8 +22,10 @@ namespace JohannasReactProject.Services.Concrete
             _userRepo = userRepo;
             _fixedCostRepo = fixedCostCategoryRepo;
         }
-        public async Task Edit(EditBudgetDTO budget)
+        public async Task Edit(EditBudgetDTO budgetDTO, string userId)
         {
+            var user = _userRepo.GetUser(userId);
+            var budget = new Budget { }
             await _budgetRepo.Edit(budget);
         }
 

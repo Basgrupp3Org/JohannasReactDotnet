@@ -10,8 +10,8 @@ namespace JohannasReactProject.Repositories.Abstract
 {
     public interface IFixedCostCategoryRepo
     {
-        Task Post(FixedCostsCategories fixedCostsCategories, string userId);
-        Task Edit(EditFixedCostCategoryDTO editFixedCostCategoryDTO);
-        IEnumerable<FixedCostsCategories> Get(ApplicationUser user);
+        Task Post(FixedCostsCategories fixedCostsCategories);
+        Task Edit(FixedCostsCategories editedFixedCostCategories);
+        ICollection<FixedCostsCategories> Get(ApplicationUser user);
     }
 }

@@ -11,7 +11,7 @@ namespace JohannasReactProject.Services.Abstract
     public interface IBudgetService
     {
         Task Post(Budget budget, string userId);
-        Task Edit(EditBudgetDTO budget);
+        Task Edit(EditBudgetDTO budget, string userId);
         IEnumerable<BudgetDTO> Get(string userId);
         Budget GetCurrentBudget(string userId);
 

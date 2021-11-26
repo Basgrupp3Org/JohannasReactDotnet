@@ -9,8 +9,8 @@ namespace JohannasReactProject.Services.Abstract
 {
     public interface IFixedCostCategoryService
     {
-        Task Post(FixedCostsCategories fixedCostsCategories, string userId);
-        Task Edit(EditFixedCostCategoryDTO editFixedCostCategoryDTO);
+        Task Post(FixedCostsCategories fixedCostsCategory, string userId);
+        Task Edit(EditFixedCostCategoryDTO editFixedCostCategoryDTO, string userId);
         IEnumerable<FixedCostCategoryDTO> Get(string userId);
     }
 }

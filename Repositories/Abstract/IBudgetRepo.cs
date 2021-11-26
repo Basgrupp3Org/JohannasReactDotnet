@@ -11,8 +11,8 @@ namespace JohannasReactProject.Repositories.Abstract
     public interface IBudgetRepo
     {
         Task Post(Budget budget);
-        Task Edit(EditBudgetDTO budget);
-        IEnumerable<Budget> Get(ApplicationUser user);
+        Task Edit(Budget budget);
+        ICollection<Budget> Get(ApplicationUser user);
         Budget GetCurrentBudget(ApplicationUser user);
     }
 }

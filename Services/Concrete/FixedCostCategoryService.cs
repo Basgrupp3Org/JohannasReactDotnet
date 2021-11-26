@@ -13,15 +13,20 @@ namespace JohannasReactProject.Services.Concrete
     {
         private readonly IFixedCostCategoryRepo _fixedCostCategoryRepo;
         private readonly IUserRepo _userRepo;
+        private readonly IBudgetRepo _budgetRepo;
 
-        public FixedCostCategoryService(IFixedCostCategoryRepo fixedCostCategoryRepo, IUserRepo userRepo)
+        public FixedCostCategoryService(IFixedCostCategoryRepo fixedCostCategoryRepo, IUserRepo userRepo, IBudgetRepo budgetRepo)
         {
             _fixedCostCategoryRepo = fixedCostCategoryRepo;
             _userRepo = userRepo;
+            _budgetRepo = budgetRepo;
         }
-        public async Task Edit(EditFixedCostCategoryDTO editFixedCostCategoryDTO)
+        public async Task Edit(EditFixedCostCategoryDTO editFixedCostCategoryDTO, string userId)
         {
-           await _fixedCostCategoryRepo.Edit(editFixedCostCategoryDTO);
+            var user = _userRepo.GetUser(userId);
+            var budget = _budgetRepo.Get(user);
+            var editedFixedCostCategory = new FixedCostsCategories { User = user, Name = editFixedCostCategoryDTO.Name, Cost = editFixedCostCategoryDTO.Cost, Budget = budget, Id = editFixedCostCategoryDTO.Id };
+           await _fixedCostCategoryRepo.Edit(editedFixedCostCategory);
         } 
 
         public IEnumerable<FixedCostCategoryDTO> Get(string userId)
@@ -40,9 +45,14 @@ namespace JohannasReactProject.Services.Concrete
             return returnList;
         }
 
-        public async Task Post(FixedCostsCategories fixedCostsCategories, string userId)
+        public async Task Post(FixedCostsCategories fixedCostsCategory, string userId)
         {
-            await _fixedCostCategoryRepo.Post(fixedCostsCategories, userId);
+            var user = _userRepo.GetUser(userId);
+            var budget = _budgetRepo.GetCurrentBudget(user);
+            fixedCostsCategory.User = user;
+            budget.FixedCostsCategories.Add(fixedCostsCategory);
+            budget.Unbudgeted -= fixedCostsCategory.Cost;
+            await _fixedCostCategoryRepo.Post(fixedCostsCategory);
         }
     }
 }

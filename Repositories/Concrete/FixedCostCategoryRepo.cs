@@ -16,38 +16,20 @@ namespace JohannasReactProject.Repositories.Concrete
         private readonly ApplicationDbContext _context;
 
         public FixedCostCategoryRepo(ApplicationDbContext context) => _context = context;
-        public async Task Edit(EditFixedCostCategoryDTO editFixedCostCategoryDTO)
+        public async Task Edit(FixedCostsCategories editedFixedCostCategory)
         {
-            var foundCategory = _context.FixedCostsCategories.Where(x => x.Id == editFixedCostCategoryDTO.Id).FirstOrDefault();
-
-            foundCategory.Name = editFixedCostCategoryDTO.Name;
-            foundCategory.Cost = editFixedCostCategoryDTO.Cost;
-
+            var foundCategory = _context.FixedCostsCategories.Where(x => x.Id == editedFixedCostCategory.Id).FirstOrDefault();
+            foundCategory = editedFixedCostCategory;
             await _context.SaveChangesAsync();
         }
 
         public IEnumerable<FixedCostsCategories> Get(ApplicationUser user)
         {
-            //var returnList = new List<FixedCostCategoryDTO>();
-            var returnList = _context.FixedCostsCategories.Where(x => x.User == user).ToList();
-            //foreach (var item in fixedCostCateogry)
-            //{
-            //    returnList.Add(new FixedCostCategoryDTO
-            //    {
-            //        Name = item.Name,
-            //        Cost = item.Cost
-            //    });
-            //}
-            return returnList;
+            return _context.FixedCostsCategories.Where(x => x.User == user).ToList();
         }
 
-        public async Task Post(FixedCostsCategories fixedCostsCategory, string userId)
+        public async Task Post(FixedCostsCategories fixedCostsCategory)
         {
-            var budget = _context.Budgets.Where(b => b.User.Id == userId).OrderByDescending(b => b.StartDate).Include(f => f.FixedCostsCategories).FirstOrDefault();
-            budget.FixedCostsCategories.Add(fixedCostsCategory);
-            budget.Unbudgeted -= fixedCostsCategory.Cost;
-            var person = _context.Users.Where(u => u.Id == userId).FirstOrDefault();
-            fixedCostsCategory.User = person;
             _context.FixedCostsCategories.Add(fixedCostsCategory);
             await _context.SaveChangesAsync();
         }
