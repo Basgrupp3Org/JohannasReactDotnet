@@ -21,6 +21,9 @@ namespace JohannasReactProject.Services.Concrete
 
         public IEnumerable<SavingGoalDTO> Get(string userId)
         {
+            var returnList = new List<SavingGoalDTO>();
+            
+
             return _savingGoalRepo.Get(userId);
         }
 

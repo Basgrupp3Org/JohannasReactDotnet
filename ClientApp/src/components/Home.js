@@ -6,8 +6,8 @@ export class Home extends Component {
   render() {
     return (
       <div>
-        <h1>Budget app</h1>
-        <p>Välkommen till detta</p>
+        <h1 style={{ color: "white" }}>Budget App</h1>
+        <p style={{ color: "white" }}>Välkommen till detta</p>
       </div>
     );
   }

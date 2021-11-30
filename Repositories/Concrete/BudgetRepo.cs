@@ -66,16 +66,6 @@ namespace JohannasReactProject.Repositories.Concrete
 
         public async Task Post(Budget budget, string userId)
         {
-            var person = _context.Users.Where(u => u.Id == userId).FirstOrDefault();
-            var fixedCosts = _context.FixedCostsCategories.Where(f => f.User.Id == userId).ToList();
-            decimal totalFixedCostSum = 0;
-            foreach(var item in fixedCosts)
-            {
-                totalFixedCostSum += item.Cost;
-            }
-            budget.User = person;
-            budget.FixedCostsCategories = fixedCosts;
-            budget.Unbudgeted = budget.Income - totalFixedCostSum;
             _context.Budgets.Add(budget);
            await _context.SaveChangesAsync();
         }

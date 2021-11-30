@@ -13,16 +13,16 @@ import './custom.css'
 export default class App extends Component {
   static displayName = App.name;
 
-  render () {
+  render() {
     return (
       <Layout>
-            <Route exact path='/' component={Home} />
-         
-            
-     
-            <AuthorizeRoute path='/HomePage' component={HomePage} />
-            <AuthorizeRoute path='/HistoryPage' component={HistoryPage} />
-            <AuthorizeRoute path='/BudgetPage' component={BudgetPage} />
+        <Route exact path='/' component={Home} />
+
+
+
+        <AuthorizeRoute path='/HomePage' component={HomePage} />
+        <AuthorizeRoute path='/HistoryPage' component={HistoryPage} />
+        <AuthorizeRoute path='/BudgetPage' component={BudgetPage} />
 
         <Route path={ApplicationPaths.ApiAuthorizationPrefix} component={ApiAuthorizationRoutes} />
       </Layout>

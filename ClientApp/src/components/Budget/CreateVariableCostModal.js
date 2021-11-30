@@ -52,13 +52,13 @@ function CreateVariableCostModal() {
         window.alert('Your Category has succesfully been uploaded!') 
     }
 
-    const handleBudgetChange = (e) => {
+    //const handleBudgetChange = (e) => {
        
-       setToSpend(e.target.value)
+    //   setToSpend(e.target.value)
        
 
        
-    }
+    //}
 
     async function PostFixedCategory() {
         const requestObject = { 

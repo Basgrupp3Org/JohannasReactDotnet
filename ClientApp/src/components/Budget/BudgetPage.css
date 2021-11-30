@@ -14,7 +14,7 @@
     height: 300px;
     justify-content: space-between;
     margin-top: 50px;
-    
+   
 }
 
 .budgetpage__bottomtopleft_div {
@@ -57,7 +57,8 @@
 }
 
 .SubmitBudget {
-
+  
+   
     width: 150px;
     height: 70px;
     border-radius: -10px;
@@ -65,12 +66,18 @@
     font-size: 20px;
     color: black;
     justify-self: start;
-    
-}
 
+   
+}
+.BudgetSubmit
+{
+    display: flex;
+    background: white;
+}
 
 .AccordionSummary {
     background: linear-gradient(#fff, #2a9d8f);
+   
 }
 
 

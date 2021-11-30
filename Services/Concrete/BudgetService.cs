@@ -13,7 +13,15 @@ namespace JohannasReactProject.Services.Concrete
     public class BudgetService : IBudgetService
     {
         private readonly IBudgetRepo _budgetRepo;
-        public BudgetService(IBudgetRepo budgetRepo) => _budgetRepo = budgetRepo;
+        private readonly IUserRepo _userRepo;
+        private readonly IFixedCostCategoryRepo _fixedCostCategoryRepo;
+
+        public BudgetService(IBudgetRepo budgetRepo, IFixedCostCategoryRepo fixedCostCategoryRepo, IUserRepo userRepo)
+        {
+            _budgetRepo = budgetRepo;
+            _fixedCostCategoryRepo = fixedCostCategoryRepo;
+            _userRepo = userRepo;
+        } 
         public async Task Edit(EditBudgetDTO budget)
         {
             await _budgetRepo.Edit(budget);
@@ -26,7 +34,28 @@ namespace JohannasReactProject.Services.Concrete
 
         public async Task Post(Budget budget, string userId)
         {
-           await _budgetRepo.Post(budget, userId);
+            var fixedListDto = _fixedCostCategoryRepo.Get(userId);
+            var fixedList = new List<FixedCostsCategories>();
+            foreach (var item in fixedListDto)
+            {
+                fixedList.Add(new FixedCostsCategories
+                {
+                    Name = item.Name,
+                    Id = item.Id,
+                    Cost = item.Cost
+
+                }) ;
+            }
+            decimal totalFixedCostSum = 0;
+            foreach (var item in fixedList)
+            {
+                totalFixedCostSum += item.Cost;
+            }
+            budget.User = _userRepo.GetUser(userId);
+            budget.FixedCostsCategories = fixedList;
+            budget.Unbudgeted = budget.Income - totalFixedCostSum;
+            await _budgetRepo.Post(budget, userId);
+
         }
     }
 }
