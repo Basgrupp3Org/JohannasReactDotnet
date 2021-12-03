@@ -59,7 +59,7 @@ namespace JohannasReactProject.Controllers
         [HttpPut]
         public async Task Put( [FromBody] EditVariableCostCategoryDTO editVariableCostCategoryDTO)
         {
-            await _service.Edit(editVariableCostCategoryDTO);
+            await _service.Edit(editVariableCostCategoryDTO, _userId);
         }
 
         // DELETE api/<VariableCostCategoryController>/5

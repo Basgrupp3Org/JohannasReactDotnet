@@ -16,14 +16,20 @@ namespace JohannasReactProject.Services.Concrete
     {
         private readonly IVariableCostCategoryRepo _variableCostCategoryRepo;
         private readonly IUserRepo _userRepo;
-        public VariableCostCategoryService(IVariableCostCategoryRepo variableCostCategoryRepo, IUserRepo userRepo)
+        private readonly IBudgetCategoryRepo _budgetCategoryRepo;
+        private readonly IBudgetRepo _budgetRepo;
+        public VariableCostCategoryService(IVariableCostCategoryRepo variableCostCategoryRepo, IUserRepo userRepo, IBudgetCategoryRepo budgetCategoryRepo, IBudgetRepo budgetRepo)
         {
             _variableCostCategoryRepo = variableCostCategoryRepo;
             _userRepo = userRepo;
+            _budgetCategoryRepo = budgetCategoryRepo;
+            _budgetRepo = budgetRepo;
         }
-        public async Task Edit(EditVariableCostCategoryDTO editVariableCostCategoryDTO)
+        public async Task Edit(EditVariableCostCategoryDTO editVariableCostCategoryDTO, string userId)
         {
-            await _variableCostCategoryRepo.Edit(editVariableCostCategoryDTO);
+            var user = _userRepo.GetUser(userId);
+            var editedVariableCostCategory = new VariableCostsCategories { User = user, Name = editVariableCostCategoryDTO.Name, Spent = editVariableCostCategoryDTO.Spent, ToSpend = editVariableCostCategoryDTO.ToSpend, Id = editVariableCostCategoryDTO.Id };
+            await _variableCostCategoryRepo.Edit(editedVariableCostCategory);
         }
 
         public IEnumerable<VariableCostCategoryDTO> Get(string userId)
@@ -46,8 +52,10 @@ namespace JohannasReactProject.Services.Concrete
         public IEnumerable<VariableCostCategoryDTO> GetForCurrentBudget(string userId)
         {
             var returnList = new List<VariableCostCategoryDTO>();
-            var currentBudget = _context.Budgets.Where(b => b.User.Id == userId).OrderByDescending(b => b.StartDate).FirstOrDefault();
-            var budgetCategories = _context.BudgetCategories.Where(x => x.Budget.Id == currentBudget.Id).Include(v => v.VariableCostsCategory).ToList();
+            //var currentBudget = _context.Budgets.Where(b => b.User.Id == userId).OrderByDescending(b => b.StartDate).FirstOrDefault();
+            var user = _userRepo.GetUser(userId);
+            var currentBudget = _budgetRepo.GetCurrentBudget(user);
+            var budgetCategories = _budgetCategoryRepo.Get(currentBudget);
 
             foreach (var item in budgetCategories)
             {
@@ -64,7 +72,19 @@ namespace JohannasReactProject.Services.Concrete
 
         public async Task Post(VariableCostsCategories variableCostsCategories, string userId)
         {
-            await _variableCostCategoryRepo.Post(variableCostsCategories, userId);
+            var user = _userRepo.GetUser(userId);
+            var currentBudget = _budgetRepo.GetCurrentBudget(user);
+            variableCostsCategories.User = user;
+            await _variableCostCategoryRepo.Post(variableCostsCategories);
+            currentBudget.Unbudgeted -= variableCostsCategories.ToSpend - variableCostsCategories.Spent;
+            var budgetCategory = new BudgetCategory
+            {
+                Budget = currentBudget,
+                User = user,
+                VariableCostsCategory = variableCostsCategories,
+                MaxSpent = variableCostsCategories.ToSpend
+            };
+            _budgetCategoryRepo.Post(budgetCategory);
         }
     }
 }

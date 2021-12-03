@@ -28,7 +28,7 @@ namespace JohannasReactProject.Repositories.Concrete
             
         }
 
-        public IEnumerable<Budget> Get(ApplicationUser user)
+        public ICollection<Budget> Get(ApplicationUser user)
         {
             var budgets = _context.Budgets.Where(b => b.User == user).ToList();
             return budgets;
@@ -36,7 +36,7 @@ namespace JohannasReactProject.Repositories.Concrete
 
         public Budget GetCurrentBudget(ApplicationUser user)
         {
-            return _context.Budgets.Where(b => b.User == user).OrderByDescending(b => b.StartDate).FirstOrDefault();
+            return _context.Budgets.Where(b => b.User == user ).OrderByDescending(b => b.StartDate).FirstOrDefault();
         }
 
         public async Task Post(Budget budget)

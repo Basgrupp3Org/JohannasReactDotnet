@@ -12,7 +12,7 @@ namespace JohannasReactProject.Repositories.Abstract
     {
         Task Post(Budget budget);
         Task Edit(EditBudgetDTO budget);
-        IEnumerable<Budget> Get(ApplicationUser user);
+        ICollection<Budget> Get(ApplicationUser user);
         Budget GetCurrentBudget(ApplicationUser user);
     }
 }

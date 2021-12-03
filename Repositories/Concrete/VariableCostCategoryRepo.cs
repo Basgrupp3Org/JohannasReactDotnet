@@ -16,42 +16,28 @@ namespace JohannasReactProject.Repositories.Concrete
         private readonly ApplicationDbContext _context;
 
         public VariableCostCategoryRepo (ApplicationDbContext context) => _context = context;
-        public async Task Edit(EditVariableCostCategoryDTO editVariableCostCategoryDTO)
+        public async Task Edit(VariableCostsCategories editedVariableCostCategory)
         {
-            var foundCategory = _context.VariableCostsCategories.Where(x => x.Id == editVariableCostCategoryDTO.Id).FirstOrDefault();
-
-            foundCategory.Name = editVariableCostCategoryDTO.Name;
-            foundCategory.Spent= editVariableCostCategoryDTO.Spent;
-            foundCategory.ToSpend = editVariableCostCategoryDTO.ToSpend;
+            var foundCategory = _context.VariableCostsCategories.Where(x => x.Id == editedVariableCostCategory.Id).FirstOrDefault();
+            foundCategory = editedVariableCostCategory;
 
             await _context.SaveChangesAsync();
         }
 
         public IEnumerable<VariableCostsCategories> Get(ApplicationUser user)
         {
-            var variableCostsCategories = new List<VariableCostsCategories>();
-            return variableCostsCategories;
+            return _context.VariableCostsCategories.Where(x => x.User == user).ToList();
         }
 
-        public IEnumerable<VariableCostsCategories> GetForCurrentBudget(ApplicationUser user)
-        {
-            var returnList = new List<VariableCostsCategories>();
-            return returnList;
-        }
+        //public IEnumerable<VariableCostsCategories> GetForCurrentBudget(ApplicationUser user)
+        //{
+        //    var returnList = new List<VariableCostsCategories>();
+        //    return returnList;
+        //}
 
-        public async Task Post(VariableCostsCategories variableCostsCategories, string userId)
+        public async Task Post(VariableCostsCategories variableCostsCategories)
         {
-            var person = _context.Users.Where(u => u.Id == userId).FirstOrDefault();
-            var budget = _context.Budgets.Where(b => b.User == person).OrderByDescending(b => b.StartDate).FirstOrDefault();
-            variableCostsCategories.User = person;
             _context.VariableCostsCategories.Add(variableCostsCategories);
-            budget.Unbudgeted -= variableCostsCategories.ToSpend - variableCostsCategories.Spent;
-            var budgetCategory = new BudgetCategory();
-            budgetCategory.Budget = budget;
-            budgetCategory.User = person;
-            budgetCategory.VariableCostsCategory = variableCostsCategories;
-            budgetCategory.MaxSpent = variableCostsCategories.ToSpend;
-            _context.BudgetCategories.Add(budgetCategory);
             await _context.SaveChangesAsync();
         }
     }

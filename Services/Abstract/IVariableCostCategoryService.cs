@@ -11,7 +11,7 @@ namespace JohannasReactProject.Services.Abstract
    public interface IVariableCostCategoryService
     {
         Task Post(VariableCostsCategories variableCostsCategories, string userId);
-        Task Edit(EditVariableCostCategoryDTO editVariableCostCategoryDTO);
+        Task Edit(EditVariableCostCategoryDTO editVariableCostCategoryDTO, string userId);
         IEnumerable<VariableCostCategoryDTO> Get(string userId);
         IEnumerable<VariableCostCategoryDTO> GetForCurrentBudget(string userId);
 

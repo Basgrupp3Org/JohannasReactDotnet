@@ -10,9 +10,9 @@ namespace JohannasReactProject.Repositories.Abstract
 {
     public interface IVariableCostCategoryRepo
     {
-        Task Post(VariableCostsCategories variableCostsCategories, string userId);
-        Task Edit(EditVariableCostCategoryDTO editVariableCostCategoryDTO);
+        Task Post(VariableCostsCategories variableCostsCategories);
+        Task Edit(VariableCostsCategories editedVariableCostCategories);
         IEnumerable<VariableCostsCategories> Get(ApplicationUser user);
-        IEnumerable<VariableCostCategoryDTO> GetForCurrentBudget(string userId);
+        //IEnumerable<VariableCostCategoryDTO> GetForCurrentBudget(string userId);
     }
 }
