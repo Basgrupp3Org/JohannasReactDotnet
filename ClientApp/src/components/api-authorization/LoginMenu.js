@@ -55,7 +55,7 @@ export class LoginMenu extends Component {
       <Fragment>
         <NavItem>
           <NavLink tag={Link} className="text-white" to={profilePath}>
-            Hello {userName}
+            Hello, {userName}!
           </NavLink>
         </NavItem>
         <NavItem>

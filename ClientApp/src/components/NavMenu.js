@@ -11,6 +11,7 @@ import {
 import { Link } from "react-router-dom";
 import { LoginMenu } from "./api-authorization/LoginMenu";
 import "./NavMenu.css";
+import { AiFillHome, AiFillEye, AiOutlineHistory, AiFillDollarCircle } from 'react-icons/ai';
 
 export class NavMenu extends Component {
   static displayName = NavMenu.name;
@@ -50,22 +51,26 @@ export class NavMenu extends Component {
               <ul className="navbar-nav flex-grow">
                 <NavItem>
                   <NavLink tag={Link} className="text-white" to="/">
+                    <AiFillHome style={{ color: "white", marginRight: "5px", marginBottom: "5px" }} />
                     Home
                   </NavLink>
                 </NavItem>
 
                 <NavItem>
                   <NavLink tag={Link} className="text-white" to="/HomePage">
+                    <AiFillEye style={{ color: "white", marginRight: "5px", marginBottom: "5px" }} />
                     Overview
                   </NavLink>
                 </NavItem>
                 <NavItem>
                   <NavLink tag={Link} className="text-white" to="/HistoryPage">
+                    <AiOutlineHistory style={{ color: "white", marginRight: "5px", marginBottom: "5px" }} />
                     History
                   </NavLink>
                 </NavItem>
                 <NavItem>
                   <NavLink tag={Link} className="text-white" to="/BudgetPage">
+                    <AiFillDollarCircle style={{ color: "white", marginRight: "5px", marginBottom: "5px" }} />
                     Budget
                   </NavLink>
                 </NavItem>
