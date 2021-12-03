@@ -60,11 +60,11 @@ export default function Budgets(props) {
             <div className="__history-sidebar">
                 {budgets.length ? budgets.map((x, i) => {
                     return <div key={i}>
-                        <ul>
-                            <li onClick={() => changeBudget(i)} className="__budget-btn">
-                                {x.name}
-                            </li>
-                        </ul>
+
+                        <div onClick={() => changeBudget(i)} className="__budget-btn">
+                            {x.name}
+                        </div>
+
 
                     </div>
                 }) : null}

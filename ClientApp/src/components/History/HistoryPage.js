@@ -61,19 +61,15 @@ export default function HistoryPage() {
             <Router>
                 <div className="__container">
                     <nav className="__history-nav">
-                        <ul>
-                            <li>
-                                <NavLink to="/history" className="__history-nav-btn">
-                                    Budgets
-                                </NavLink>
-                            </li>
-                            <div className="__line1"></div>
-                            <li>
-                                <NavLink to="/transactions" className="__history-nav-btn">
-                                    Transactions
-                                </NavLink>
-                            </li>
-                        </ul>
+                        <div className="__history-nav-items">
+                            <NavLink to="/history" className="__history-nav-btn">
+                                Budgets
+                            </NavLink>
+                            {/* <div className="__line1"></div> */}
+                            <NavLink to="/transactions" className="__history-nav-btn">
+                                Transactions
+                            </NavLink>
+                        </div>
                         <hr />
                     </nav>
                     <Switch>

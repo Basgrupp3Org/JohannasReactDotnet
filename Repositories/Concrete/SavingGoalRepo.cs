@@ -28,9 +28,7 @@ namespace JohannasReactProject.Repositories.Concrete
 
         public IEnumerable<SavingGoal> Get(ApplicationUser user)
         {
-            var savingGoals = _context.SavingGoals.Where(u => u.User == user).ToList();
-
-            return savingGoals;
+            return _context.SavingGoals.Where(u => u.User == user).ToList();
         }
 
         public async Task Post(SavingGoal savingGoal)
