@@ -1,7 +1,4 @@
-﻿body {
-    background-color: #282c34;
-    /* background-color: white; */
-}
+﻿
 
 table {
     /* border: 1px solid white; */
@@ -171,11 +168,12 @@ hr {
     flex-direction: row;
     flex-wrap: wrap;
     margin-bottom: 10px;
+    color: var(--text-primary)
 }
 
 .__history-nav-btn {
     text-decoration: none;
-    color: #ABB2BF;
+    color: var(--text-primary);
     list-style-type: none;
     padding: 0 10px 0 10px;
     font-size: 30px;
@@ -213,11 +211,10 @@ hr {
 
 .__budget-btn {
     border: none;
-    background-color: #282c34;
-    color: #ABB2BF;
     font-size: 18px;
     padding: 10px 0 10px 0;
     cursor: pointer;
+    color: var(--text-primary)
 }
 
 .__budget-btn:hover {

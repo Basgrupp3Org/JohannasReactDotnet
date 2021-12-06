@@ -1,18 +1,24 @@
 import React from 'react'
 import "./Footer.css"
 import { AiFillGithub, AiFillYoutube } from 'react-icons/ai';
+import { ThemeContext } from "../Theme";
 
 export default function Footer() {
-    return (
-        <footer>
-            <p className="footer-content">© 2021 Copyright Basgrupp 3</p>
-            <a href="https://github.com/Basgrupp3Org" style={{ color: "#ABB2BF" }}>
-                <AiFillGithub style={{ fontSize: "40px", marginRight: "10px" }} />
+  return (
+    <footer>
+      <p className="footer-content">© 2021 Copyright Basgrupp 3</p>
+      <ThemeContext.Consumer>
+        {theme => (
+          <span className={theme}>
+            <a href="https://github.com/Basgrupp3Org" >
+              <AiFillGithub style={{ fontSize: "30px", marginRight: "10px" }} />
             </a>
-            <a href="https://youtu.be/UIkmw0LBGiA?t=3155" style={{ color: "#ABB2BF" }}>
-                <AiFillYoutube style={{ fontSize: "40px" }} />
+            <a href="https://youtu.be/UIkmw0LBGiA?t=3155" >
+              <AiFillYoutube style={{ fontSize: "30px" }} />
             </a>
-
-        </footer>
-    )
+          </span>
+        )}
+      </ThemeContext.Consumer>
+    </footer>
+  )
 }

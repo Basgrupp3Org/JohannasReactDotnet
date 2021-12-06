@@ -11,7 +11,8 @@ import {
 import { Link } from "react-router-dom";
 import { LoginMenu } from "./api-authorization/LoginMenu";
 import "./NavMenu.css";
-import { AiFillHome, AiFillEye, AiOutlineHistory, AiFillDollarCircle } from 'react-icons/ai';
+import { AiFillHome, AiFillEye, AiFillCalendar, AiFillDollarCircle } from 'react-icons/ai';
+import { ThemeContext } from "../Theme";
 
 export class NavMenu extends Component {
   static displayName = NavMenu.name;
@@ -22,8 +23,16 @@ export class NavMenu extends Component {
     this.toggleNavbar = this.toggleNavbar.bind(this);
     this.state = {
       collapsed: true,
+      // theme: "",
+
     };
   }
+
+  // componentDidMount() {
+  //   let theme = localStorage.getItem("theme
+  // console.log(theme); ");
+  //   this.setState({ theme: theme })
+  // }
 
   toggleNavbar() {
     this.setState({
@@ -33,53 +42,58 @@ export class NavMenu extends Component {
 
   render() {
     return (
-      <header>
-        <Navbar
-          className="navbar-expand-sm navbar-toggleable-sm ng-white border-bottom box-shadow mb-3"
-          light
-        >
-          <Container>
-            <NavbarBrand tag={Link} to="/">
-              <span className="text-white"> JohannasReactProject</span>
-            </NavbarBrand>
-            <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
-            <Collapse
-              className="d-sm-inline-flex flex-sm-row-reverse"
-              isOpen={!this.state.collapsed}
-              navbar
-            >
-              <ul className="navbar-nav flex-grow">
-                <NavItem>
-                  <NavLink tag={Link} className="text-white" to="/">
-                    <AiFillHome style={{ color: "white", marginRight: "5px", marginBottom: "5px" }} />
-                    Home
-                  </NavLink>
-                </NavItem>
+      <ThemeContext.Consumer>
+        {theme => (
+          <header>
+            <Navbar
+              className="navbar-expand-sm navbar-toggleable-sm ng-white border-bottom box-shadow mb-3"
+              light>
 
-                <NavItem>
-                  <NavLink tag={Link} className="text-white" to="/HomePage">
-                    <AiFillEye style={{ color: "white", marginRight: "5px", marginBottom: "5px" }} />
-                    Overview
-                  </NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink tag={Link} className="text-white" to="/HistoryPage">
-                    <AiOutlineHistory style={{ color: "white", marginRight: "5px", marginBottom: "5px" }} />
-                    History
-                  </NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink tag={Link} className="text-white" to="/BudgetPage">
-                    <AiFillDollarCircle style={{ color: "white", marginRight: "5px", marginBottom: "5px" }} />
-                    Budget
-                  </NavLink>
-                </NavItem>
-                <LoginMenu></LoginMenu>
-              </ul>
-            </Collapse>
-          </Container>
-        </Navbar>
-      </header>
-    );
+              <Container>
+                <NavbarBrand tag={Link} to="/">
+                  <span className={theme}> JohannasReactProject</span>
+                </NavbarBrand>
+                <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
+                <Collapse
+                  className="d-sm-inline-flex flex-sm-row-reverse"
+                  isOpen={!this.state.collapsed}
+                  navbar
+                >
+                  <ul className="navbar-nav flex-grow">
+                    <NavItem>
+                      <NavLink tag={Link} to="/">
+
+                        <span className={theme} > <AiFillHome className="mb-2 me-2" /> Home </span>
+                      </NavLink>
+                    </NavItem>
+
+                    <NavItem>
+                      <NavLink tag={Link} to="/HomePage">
+
+                        <span className={theme}> <AiFillEye className="mb-2 me-2" /> Overview</span>
+                      </NavLink>
+                    </NavItem>
+                    <NavItem>
+                      <NavLink tag={Link} to="/HistoryPage">
+
+                        <span className={theme}> <AiFillCalendar className="mb-2 me-2" /> History </span>
+                      </NavLink>
+                    </NavItem>
+                    <NavItem>
+                      <NavLink tag={Link} to="/BudgetPage">
+
+                        <span className={theme}><AiFillDollarCircle className="mb-2 me-2" /> Budget </span>
+                      </NavLink>
+                    </NavItem>
+                    <LoginMenu></LoginMenu>
+                  </ul>
+                </Collapse>
+              </Container>
+            </Navbar>
+          </header >
+        )}
+
+
+      </ThemeContext.Consumer>)
   }
 }

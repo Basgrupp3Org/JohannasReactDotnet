@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useContext } from 'react';
 import { Route } from 'react-router';
 import { Layout } from './components/Layout';
 import { Home } from './components/Home';
@@ -9,23 +9,24 @@ import HomePage from './components/Home/HomePage';
 import HistoryPage from './components/History/HistoryPage';
 import BudgetPage from './components/Budget/BudgetPage';
 import './custom.css'
+import { ThemeContext } from './Theme';
 
-export default class App extends Component {
-  static displayName = App.name;
+export default function App() {
+  // const displayName = App.name;
+  const { theme } = useContext(ThemeContext)
 
-  render () {
-    return (
-      <Layout>
-            <Route exact path='/' component={Home} />
-         
-            
-     
-            <AuthorizeRoute path='/HomePage' component={HomePage} />
-            <AuthorizeRoute path='/HistoryPage' component={HistoryPage} />
-            <AuthorizeRoute path='/BudgetPage' component={BudgetPage} />
+  // const MyComponent = (props) => {
 
-        <Route path={ApplicationPaths.ApiAuthorizationPrefix} component={ApiAuthorizationRoutes} />
-      </Layout>
-    );
-  }
+  // }
+  // MyComponent.displayName = App.name;
+  return (
+    <Layout >
+      <Route exact path='/' component={Home} />
+      <AuthorizeRoute path='/HomePage' component={HomePage} />
+      <AuthorizeRoute path='/HistoryPage' component={HistoryPage} />
+      <AuthorizeRoute path='/BudgetPage' component={BudgetPage} />
+      <Route path={ApplicationPaths.ApiAuthorizationPrefix} component={ApiAuthorizationRoutes} />
+    </Layout>
+  );
 }
+

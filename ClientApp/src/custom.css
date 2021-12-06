@@ -1,14 +1,72 @@
 /* Provide sufficient contrast against white background */
-a {
-  color: #0366d6;
+.nav-item {
+  color: var(--text-primary)
 }
 
+p {
+  color: var(--text-primary)
+}
+
+h1 {
+  color: var(--text-primary)
+}
+
+/* label {
+  color: var(--primary-green)
+} */
+
+a {
+  color: var(--text-primary)
+}
 code {
   color: #E01A76;
 }
 
+span {
+  color: var(--text-primary)
+}
 .btn-primary {
   color: #fff;
   background-color: #1b6ec2;
   border-color: #1861ac;
+}
+
+body {
+  background-color: var(--bg-primary);
+}
+
+:root {
+  --primary-green: #2a9d8f;
+  --primary-blue: #2A99EA;
+
+  --text-primary-light: rgb(46, 46, 46);
+  --text-primary-dark: #ABB2BF;
+
+  --text-secondary-light: rgb(70, 70, 70);
+  --text-secondary-dark: rgb(160, 160, 160);
+
+  --bg-primary-light: #e1e7f3;
+  --bg-primary-dark: #282c34;
+
+  --bg-secondary-light: rgb(212, 212, 212);
+  --bg-secondary-dark: rgb(34, 34, 34);
+
+  --bg-navbar-light: #c0c5cf;
+  --bg-navbar-dark: #20242b;
+}
+
+.light-theme {
+  --text-primary: var(--text-primary-light);
+  --text-secondary: var(--text-secondary-light);
+  --bg-primary: var(--bg-primary-light);
+  --bg-secondary: var(--bg-secondary-light);
+  --bg-navbar: var(--bg-navbar-light);
+}
+
+.dark-theme {
+  --text-primary: var(--text-primary-dark);
+  --text-secondary: var(--text-secondary-dark);
+  --bg-primary: var(--bg-primary-dark);
+  --bg-secondary: var(--bg-secondary-dark);
+  --bg-navbar: var(--bg-navbar-dark);
 }

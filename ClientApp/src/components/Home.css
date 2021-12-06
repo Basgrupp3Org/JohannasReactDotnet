@@ -1,0 +1,40 @@
+.landing-container {
+    background-color: var(--bg-primary);
+}
+
+.container1 {
+    background-color: var(--bg-secondary);
+    height: 100px;
+    width: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-primary);
+    border: 2px solid var(--text-primary);
+}
+
+.heading1 {
+    color: var(--text-primary);
+}
+
+.heading2 {
+    color: var(--text-secondary);
+}
+
+.heading3 {
+    color: var(--primary-blue);
+}
+
+.heading4 {
+    color: var(--secondary-blue);
+}
+
+.header-toggle-buttons button {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    padding: 5px 15px;
+    margin: 5px 10px;
+    border: 2px solid var(--text-primary);
+    cursor: pointer;
+}
+

@@ -1,5 +1,7 @@
-﻿import React, { useState, useEffect } from "react";
+﻿import React, { useState, useEffect, useContext } from "react";
 import "../History/HistoryPage.css";
+import "../../custom.css"
+import { ThemeContext } from "../../Theme";
 import Budgets from "./components/Budgets";
 import Transactions from "./components/Transactions";
 import authService from '../api-authorization/AuthorizeService';
@@ -14,6 +16,7 @@ export default function HistoryPage() {
     const [budgetData, setBudgetData] = useState([]);
     const [purchaseData, setPurchaseData] = useState([]);
     const [savingData, setSavingData] = useState([]);
+    const { theme, toggleTheme } = useContext(ThemeContext);
 
     useEffect(() => {
         async function fetchBudgets() {

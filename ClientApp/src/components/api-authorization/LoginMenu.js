@@ -3,7 +3,7 @@ import { NavItem, NavLink } from "reactstrap";
 import { Link } from "react-router-dom";
 import authService from "./AuthorizeService";
 import { ApplicationPaths } from "./ApiAuthorizationConstants";
-
+import { ThemeContext } from "../../Theme";
 export class LoginMenu extends Component {
   constructor(props) {
     super(props);
@@ -52,18 +52,22 @@ export class LoginMenu extends Component {
 
   authenticatedView(userName, profilePath, logoutPath) {
     return (
-      <Fragment>
-        <NavItem>
-          <NavLink tag={Link} className="text-white" to={profilePath}>
-            Hello, {userName}!
-          </NavLink>
-        </NavItem>
-        <NavItem>
-          <NavLink tag={Link} className="text-white" to={logoutPath}>
-            Logout
-          </NavLink>
-        </NavItem>
-      </Fragment>
+      <ThemeContext.Consumer>{theme => (
+        <Fragment>
+          <NavItem>
+            <NavLink tag={Link} to={profilePath}>
+              <span className={theme} >Hello, {userName}!</span>
+            </NavLink>
+          </NavItem>
+          <NavItem>
+            <NavLink tag={Link} className="text-white" to={logoutPath}>
+              <span className={theme}>Log out</span>
+            </NavLink>
+          </NavItem>
+        </Fragment>
+      )}</ThemeContext.Consumer>
+
+
     );
   }
 

@@ -3,7 +3,7 @@
     display: flex;
     flex-direction: row;
     column-gap: 70px;
-    color: gray;
+    color: var(--text-primary);
 }
 
 .budget__centercontent {
@@ -11,7 +11,7 @@
     text-align: center;
     line-height: 150%;
     font-size: 1.5em;
-    color: aquamarine;
+    color: var(--primary-blue);
 }
 
 .budget__dates {
@@ -19,7 +19,6 @@
     text-align: center;
     line-height: 150%;
     font-size: 1.2em;
-    color: gray;
     word-spacing: 40px;
     padding-bottom: 10px;
 }
@@ -28,7 +27,6 @@
     display: flex;
     flex-direction: column;
     column-gap: 70px;
-    color: gray;
     margin-bottom: 15px;
 }
 
@@ -36,7 +34,6 @@
     display: flex;
     flex-direction: column;
     column-gap: 70px;
-    color: gray;
     margin-bottom: 15px;
 }
 
@@ -104,7 +101,7 @@
 }
 
 .bigsavinggoal__title_label {
-    color: aquamarine;
+    color: var(--primary-blue);
 }
 
 .bigsavinggoal__progressbar {
@@ -124,8 +121,7 @@
 
 .bigsavinggoal__LabelSaving1 {
     margin-bottom: 10px;
-    ;
-    color: gray;
+    
 }
 
 .bigsavinggoal__LabelSaving2 {
@@ -135,7 +131,6 @@
 
 .bigsavinggoal__LabelSaving3 {
     margin-top: 15px;
-    color: gray;
 }
 
 
@@ -144,7 +139,6 @@
     justify-content: flex-start;
     padding-right: 10px;
     padding-top: 10px;
-    color: gray;
 }
 
 .variablecosts__progressbar_div {
@@ -166,18 +160,18 @@
 }
 
 
-.lasttransaction__purchaseName_label {
+/* .lasttransaction__purchaseName_label {
     color: gray;
-}
+} */
 
 .lasttransaction__priceforpurchase_label {
-    color: gray;
+   
     display: flex;
     align-items: flex-end;
 }
 
 .lasttransaction__dateforpurchase_label {
-    color: gray;
+   
     display: flex;
     flex-direction: column;
     align-items: flex-end;
@@ -191,7 +185,7 @@
 
 
 .lasttransaction__BuyLabel_label {
-    color: aquamarine;
+    color: var(--primary-blue);
 }
 
 
@@ -218,14 +212,13 @@
     display: flex;
     flex-direction: column;
     column-gap: 70px;
-    color: gray;
+    
     padding-top: 5px;
 }
 
 
 .btn {
     width: 150px;
-    height: 30px;
     border-radius: 25px;
     background: linear-gradient(#fff, #2a9d8f);
     font-size: 20px;
