@@ -1,5 +1,7 @@
-﻿import React, {useState, useEffect } from "react";
+﻿import React, { useState, useEffect, useContext } from "react";
 import "../History/HistoryPage.css";
+import "../../custom.css"
+import { ThemeContext } from "../../Theme";
 import Budgets from "./components/Budgets";
 import Transactions from "./components/Transactions";
 import authService from '../api-authorization/AuthorizeService';
@@ -7,39 +9,53 @@ import {
     BrowserRouter as Router,
     Switch,
     Route,
-    NavLink,
-    useParams,
-    useRouteMatch,
+    NavLink
 } from "react-router-dom";
 
 export default function HistoryPage() {
-    let { path, url } = useRouteMatch();
     const [budgetData, setBudgetData] = useState([]);
-
-    const fetchBudgets = () => {
-        const token = authService.getAccessToken();
-        console.log(token)
-        fetch('api/budget', {
-            method: "GET",
-            headers: !token ? {} : {
-                'Authorization': "Bearer " + token,
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            },
-
-        })
-            /*.then((data) => data.json())*/
-            .then((data) => {
-                setBudgetData(data)
-            })
-            .catch((err) => {
-                console.error(err);
-            });
-
-    }
+    const [purchaseData, setPurchaseData] = useState([]);
+    const [savingData, setSavingData] = useState([]);
+    const { theme, toggleTheme } = useContext(ThemeContext);
 
     useEffect(() => {
+        async function fetchBudgets() {
+            const token = await authService.getAccessToken();
+            const response = await fetch('api/budget', {
+                headers: !token ? {} : { 'Authorization': `Bearer ${token}` }
+            });
+            const data = await response.json();
+            console.log(data)
+            setBudgetData(data[data.length - 1])
+        }
         fetchBudgets()
+    }, []);
+
+    useEffect(() => {
+        async function fetchPurchases() {
+            const token = await authService.getAccessToken();
+            const response = await fetch('api/purchase', {
+                headers: !token ? {} : { 'Authorization': `Bearer ${token}` }
+            });
+            const data = await response.json()
+            console.log(data)
+            setPurchaseData(data)
+        }
+        fetchPurchases()
+    }, []);
+
+    useEffect(() => {
+        async function fetchSavingGoals() {
+            const token = await authService.getAccessToken();
+            const response = await fetch('api/savinggoal', {
+                headers: !token ? {} : { 'Authorization': `Bearer ${token}` }
+            });
+            const data = await response.json()
+            console.log(data)
+            setSavingData(data)
+        }
+
+        fetchSavingGoals()
 
     }, []);
 
@@ -48,28 +64,23 @@ export default function HistoryPage() {
             <Router>
                 <div className="__container">
                     <nav className="__history-nav">
-                        <ul>
-                            <li>
-                                <NavLink to="/history" className="__history-nav-btn">
-                                    Budgets
-                                </NavLink>
-                            </li>
-                            <div className="__line1"></div>
-                            <li>
-                                <NavLink to="/transactions" className="__history-nav-btn">
-                                    Transactions
-                                </NavLink>
-                            </li>
-                        </ul>
+                        <div className="__history-nav-items">
+                            <NavLink to="/history" className="__history-nav-btn">
+                                Budgets
+                            </NavLink>
+                            {/* <div className="__line1"></div> */}
+                            <NavLink to="/transactions" className="__history-nav-btn">
+                                Transactions
+                            </NavLink>
+                        </div>
                         <hr />
                     </nav>
-
                     <Switch>
                         <Route exact path="/history">
-                            <Budgets data={budgetData} />
+                            {budgetData ? < Budgets data={budgetData} savingData={savingData} /> : "Loading..."}
                         </Route>
                         <Route exact path="/transactions">
-                            <Transactions />
+                            {purchaseData ? <Transactions data={purchaseData} /> : "Loading..."}
                         </Route>
                     </Switch>
                 </div>

@@ -1,79 +1,43 @@
-﻿import React from "react";
-import Accordion from './Accordion'
+﻿
+import React, { useState, useEffect} from "react";
+import authService from "../api-authorization/AuthorizeService"
+import {ControlledAccordions} from "./Accordion";
+import {Accordions} from './Accordion';
 import './BudgetPage.css'
-import CreateCategoryModal from './CreateCategoryModal';
-import CreateBudgetModal from './CreateBudgetModal';
 
 
 
+export default function BudgetPage() {
+    const [budgetData, setBudgetData] = useState([]);
+    // const [variableCosts, setVariableCosts] = useState([]);
+    // const [fixedCosts, setFixedCosts] = useState([]);
 
-function BudgetPage() {
-    return (
-        <div>
-            <Accordion
-                title="Datum"
-                content="16-06-2021 - 31-06-2021"
-            />
+   
+    
 
-
-            <Accordion
-                title="Bostad      3000kr/mån"
-                content="3000:- Bostad"
-            />
-
-
-            <Accordion
-                title="Fordon      3000kr/mån"
-                content="1000:-    Volvo" />
-
-            <Accordion
-                title="Rörliga kostnader    8000kr/mån"
-                content="500:-    SF Bio" />
-
-            <Accordion
-                title="Fasta utgifter     1000kr/mån"
-                content="1000:-        CSN-Lån" />
-
-            <Accordion
-                title="Obudgeterat   1000kr/mån"
-                content="1000:-  Cykelaffär" />
-
-            <Accordion
-                title="Inkomst   37000 SEK"
-                content="37000:-   Lön"
-            />
-
-
-            <div className="buttons">
-
-                <CreateCategoryModal />
-
-                <CreateBudgetModal />
-
-
-
-
+    
+   
+    return(
+        
+        <div className="budgetpage__fullpage_div">
+            <div className="budgetpage__leftside_div">
+            <Accordions/> 
             </div>
+            
+            
+            
+        
 
-
-
-
-
-
-
-
-
-
-
-
-
+            
         </div>
+    )
+    
+    
 
 
 
-    );
+
+       
+
+
 }
-
-
-
-export default BudgetPage;

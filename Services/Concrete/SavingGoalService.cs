@@ -12,7 +12,12 @@ namespace JohannasReactProject.Services.Concrete
     public class SavingGoalService : ISavingGoalService
     {
         private readonly ISavingGoalRepo _savingGoalRepo;
-        public SavingGoalService(ISavingGoalRepo savingGoalRepo) => _savingGoalRepo = savingGoalRepo;
+        private readonly IUserRepo _userRepo;
+        public SavingGoalService(ISavingGoalRepo savingGoalRepo, IUserRepo userRepo)
+        {
+            _savingGoalRepo = savingGoalRepo;
+            _userRepo = userRepo;
+        }
 
         public async Task Edit(EditSavingGoalDTO editSavingGoalDTO)
         {
@@ -21,12 +26,29 @@ namespace JohannasReactProject.Services.Concrete
 
         public IEnumerable<SavingGoalDTO> Get(string userId)
         {
-            return _savingGoalRepo.Get(userId);
+            var returnList = new List<SavingGoalDTO>();
+            var user = _userRepo.GetUser(userId);
+            var savingGoalList = _savingGoalRepo.Get(user);
+
+            foreach (var item in savingGoalList)
+            {
+                returnList.Add(new SavingGoalDTO
+                {
+                    Name = item.Name,
+                    Saved = item.Saved,
+                    ToSave = item.ToSave
+
+                });
+            }
+
+            return returnList;
         }
 
         public async Task Post(SavingGoal savingGoal, string userId)
         {
-            await _savingGoalRepo.Post(savingGoal, userId);
+            var person = _userRepo.GetUser(userId);
+            savingGoal.User = person;
+            await _savingGoalRepo.Post(savingGoal);
         }
     }
 }

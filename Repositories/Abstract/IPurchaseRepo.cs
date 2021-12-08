@@ -10,8 +10,12 @@ namespace JohannasReactProject.Repositories.Abstract
 {
      public interface IPurchaseRepo
     {
-        Task Post(Purchase purchase, string userId);
+        Task Post(Purchase purchase);
         Task Edit(EditPurchaseDTO editPurchase);
-        ICollection<PurchaseDTO> Get(string userId);
+        ICollection<Purchase> Get(ApplicationUser user);
+
+        
+
+        
     }
 }
